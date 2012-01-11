@@ -5,6 +5,14 @@
 		<p id="downloadify">
 			You must have Flash 10 installed to download this file.
 		</p>
+		<h1>options</h1>
+		<form id="boilerplateOptions">
+			<label>WebGL Required <input type="checkbox" name="requireWebGL"></label>
+			<br/>
+			<input type="submit" value="Build" />
+		</form>
+		<input type="button" value="Download" id="downloadButton" disabled/>
+
 		<script src="vendor/jquery/jquery-1.7.1.min.js"></script>
 
 		<script src="vendor/jszip/jszip.js"></script>
@@ -16,5 +24,6 @@
 		<script src="vendor/downloadify/js/swfobject.js"></script>
 		<script src="vendor/downloadify/js/downloadify.min.js"></script>
 		<script src="index.js"></script>
+
 	</body>
 </html>

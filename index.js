@@ -21,6 +21,21 @@ var templateProcess	= function(template, data){
 	return eval("(function(){\n var data = "+JSON.stringify(data)+";\n var _buffer = '';\n"+jscode+"\nreturn _buffer;\n})()");
 }
 
+jQuery("#boilerplateOptions input").change(function(){
+	jQuery('#downloadButton').attr('disabled', 'disabled');
+});
+
+jQuery("#boilerplateOptions").submit(function(){
+	var form	= jQuery("#boilerplateOptions");
+	var data	= {
+		requireWebGL	: jQuery("[name='requireWebGL']", form).is(':checked')
+	};
+	console.log("data", JSON.stringify(data));
+	
+	jQuery('#downloadButton').attr('disabled', null);
+	return false;
+})
+
 jQuery(function(){
 	return;
 	jQuery.ajax({
@@ -34,7 +49,9 @@ jQuery(function(){
 		console.log("output", output)
 	});
 });
+
 jQuery(function(){
+	return;
 	var flow	= Flow();
 	var zip		= new JSZip();
 	var dstDirname	= "boilerplate/"
@@ -95,7 +112,7 @@ jQuery(function(){
 		onError: function(){ 
 			alert('You must put something in the File Contents or there will be nothing to save!'); 
 		},
-		transparent: false,
+		transparentf	: false,
 		swf		: 'vendor/downloadify/media/downloadify.swf',
 		downloadImage	: 'vendor/downloadify/images/download.png',
 		width		: 100,
