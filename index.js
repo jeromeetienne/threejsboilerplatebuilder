@@ -1,3 +1,9 @@
+/**
+ * 3 steps...
+ * 1. setup options
+ * 2. build bundle
+ * 3. download bundle
+*/
 jQuery(function(){
 	var flow	= Flow();
 	var zip		= new JSZip();
