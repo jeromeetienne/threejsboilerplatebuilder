@@ -4,37 +4,64 @@
  * 2. build bundle
  * 3. download bundle
 */
+
+var templateProcess	= function(template, data){
+	data		= data	|| {};
+	var lines	= template.split(/\n/);
+	var jscode	= "";
+	lines.forEach(function(line){
+		var matches	= line.match(/^[ \t]*\/\/\?[ \t](.*)/);
+		if( matches ){
+			jscode	+= matches[1] + "\n";
+		}else{
+			line	= line.replace(/"/g, "\\\"");
+			jscode	+= "_buffer += \""+line+"\\n\"\n";
+		}	
+	})
+	return eval("(function(){\n var data = "+JSON.stringify(data)+";\n var _buffer = '';\n"+jscode+"\nreturn _buffer;\n})()");
+}
+
+jQuery(function(){
+	return;
+	jQuery.ajax({
+		url	: "template/prout.html",
+		dataType: "text"
+	}).success(function(template){
+		var data	= {
+			requireWebGL	: true
+		};
+		var output	= templateProcess(template, data);
+		console.log("output", output)
+	});
+});
 jQuery(function(){
 	var flow	= Flow();
 	var zip		= new JSZip();
+	var dstDirname	= "boilerplate/"
 
 	templateFilelist.forEach(function(fileName){
 		flow.seq(function(next, err, result){
 			var baseUrl	= "template/threejsboilerplate/";
 			var fileUrl	= baseUrl+fileName;
-			console.log("start loading", fileUrl);
-
-			//jQuery.get(fileUrl, "text")
+			// console.log("start loading", fileUrl);
 			jQuery.ajax({
 				url	: fileUrl,
 				dataType: "text"
 			}).error(function(jqXHR, status){
-				console.log("ERROR loading", fileName, "argument", arguments);
-			}).complete(function(jqXHR, status){
-				console.assert(status === "success" )
-				var content	= jqXHR.responseText;
-				var folderName	= fileName.substr(0, fileName.lastIndexOf('/'));
-				//console.log("loaded file", fileName, content);
-
+				console.assert(false, "ERROR loading " + fileName)
+			}).success(function(content){
+				// console.log("file", fileName, "loaded... adding content to zip")
+				var dstName	= dstDirname + fileName;
+				var folderName	= dstName.substr(0, dstName.lastIndexOf('/'));
 				zip.folder(folderName);
-				zip.add(fileName, content);
-
+				zip.add(dstName, content);
 				next();
 			});
 		});
 	});
 	
 	flow.seq(function(next, err, result){
+		// console.log("all files loaded... generating zip")
 		var content	= zip.generate();
 		location.href	="data:application/zip;base64,"+content;
 	});
