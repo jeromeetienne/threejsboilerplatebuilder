@@ -1,28 +1,50 @@
 jQuery(function(){
 	var flow	= Flow();
-	flow.seq(function(next, err, result){
-		console.log("all loaded")
+	var zip		= new JSZip();
+
+	templateFilelist.forEach(function(fileName){
+		flow.seq(function(next, err, result){
+			var baseUrl	= "template/threejsboilerplate/";
+			var fileUrl	= baseUrl+fileName;
+			console.log("start loading", fileUrl);
+
+			//jQuery.get(fileUrl, "text")
+			jQuery.ajax({
+				url	: fileUrl,
+				dataType: "text"
+			}).error(function(jqXHR, status){
+				console.log("ERROR loading", fileName, "argument", arguments);
+			}).complete(function(jqXHR, status){
+				console.assert(status === "success" )
+				var content	= jqXHR.responseText;
+				var folderName	= fileName.substr(0, fileName.lastIndexOf('/'));
+				//console.log("loaded file", fileName, content);
+
+				zip.folder(folderName);
+				zip.add(fileName, content);
+
+				next();
+			});
+		});
 	});
 	
-	var url		= "template/index.html";
-	jQuery.get(url, function(data) {
-		console.log("url", url, data)
-		var options	= {
-			requireWebGL	: true
-		};
-		var prefix	= "<? var options = "+JSON.stringify(options)+"; ?>\n";
-		var result	= ShortTagjs.process(prefix + data);
-		console.log("result", result)
+	flow.seq(function(next, err, result){
+		var content	= zip.generate();
+		location.href	="data:application/zip;base64,"+content;
 	});
 });
+
 
 jQuery(function(){
 	return;
 	var zip		= new JSZip();
 	zip.add("Hello.txt", "Hello World\n");
+	zip.folder("css");
+	zip.add("css/main.css", "body {}\n");
 
 	//var content	= zip.generate();
 	//location.href	="data:application/zip;base64,"+content;
+	//return;
 
 	Downloadify.create('downloadify',{
 		filename: function(){
