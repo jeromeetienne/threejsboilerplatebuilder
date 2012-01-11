@@ -1,0 +1,8 @@
+{
+	"name"		: "shorttag",
+	"description"	: "Javascript template engine in 20-lines",
+	"version"	: "0.9",
+	"author"	: "Jerome Etienne <jerome.etienne@gmail.com>",
+	"keywords"	: ["template"],
+	"bin"		: { "node-shorttag": "./bin/node-shorttag" }
+}

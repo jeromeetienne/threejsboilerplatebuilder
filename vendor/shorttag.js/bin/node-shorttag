@@ -1,0 +1,54 @@
+#!/usr/bin/env node
+
+/*!
+ * shorttagjs
+ * Copyright(c) 2010 Jerome Etienne <jetienne@jetienne.com>
+ * MIT Licensed
+ */
+
+
+var tty	= require('tty');
+//
+//console.log("stding");
+//console.dir(process.stdin.fd)
+//console.log("stdin isatty", require('tty').isatty(process.stdin.fd));
+//require('tty').isatty(process.stdin.fd)
+
+
+/**
+ * Read the process.stdin if needed
+*/
+var readStdin	= function(callback){
+	// check if stdin is a tty or not
+	var isatty	= require('tty').isatty(process.stdin.fd);
+	// if stdin isatty, dont read it
+	if( isatty ){
+		callback('');
+		return;
+	}
+	// read the whole stdin and notify callback(stdinData)
+	process.stdin.resume();
+	process.stdin.setEncoding('utf8');
+	var stdinData	= ''	
+	process.stdin.on('data', function(chunk){
+		stdinData	+= chunk;
+	});
+	process.stdin.on('end', function(){
+		callback(stdinData);
+	});
+}
+
+// read data from process.stdin firt
+readStdin(function(stdinData){
+	//console.log("read from stdin", stdinData);
+	// initiate the template with stdin data
+	var tmpl	= stdinData;
+	// read and append all files from the cmline
+	for( var i = 2; i < process.argv.length; i++ ){
+		var filename	= process.argv[i];
+		tmpl	+= require('fs').readFileSync(filename).toString()
+	}
+	// process the template
+	var output	= require('../lib/shorttag').process(tmpl);
+	console.log(output)
+})

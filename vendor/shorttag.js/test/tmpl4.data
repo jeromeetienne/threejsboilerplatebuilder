@@ -1,0 +1,4 @@
+<? var PROJECT_NAME = "pacmaze"; ?>
+wow
+<?= "bla"+PROJECT_NAME ?>
+prout

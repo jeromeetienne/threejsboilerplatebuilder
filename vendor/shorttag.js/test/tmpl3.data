@@ -1,0 +1,23 @@
+<? var PROJECT_NAME = PROJECT_NAME || "pacmaze"; ?>
+<? var PROJECT_VERSION = 0; ?>
+<? var PROJECT_NAMEVERS	= PROJECT_NAME + PROJECT_VERSION;	?>
+
+NameVirtualHost *:80
+<VirtualHost *:80>
+        ServerName	<?= PROJECT_NAMEVERS ?>.jetienne.com
+	
+	# for the laster pacmaze version	
+	ServerAlias	pacmaze.com
+	ServerAlias	www.pacmaze.com
+	# redir www.pacmaze.com to pacmaze.com
+	RewriteEngine on
+	RewriteCond %{HTTP_HOST} ^www.pacmaze.com
+	RewriteRule ^(.*)$ http://pacmaze.com$1 [R=permanent,L] 
+
+	# jme- apparently this is needed for setting 'expires' header
+	<Directory /home/jerome/public_html/<?= PROJECT_NAMEVERS ?>_www_build>
+		AllowOverride FileInfo Options Indexes
+	</Directory>
+
+        DocumentRoot	/home/jerome/public_html/<?= PROJECT_NAMEVERS ?>_www_build
+</VirtualHost>
