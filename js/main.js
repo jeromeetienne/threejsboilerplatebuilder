@@ -60,8 +60,8 @@ if( fileName.match(/.*.gitignore/) )	return;
 				//console.log("file", fileName, "preloaded...")
 				this._filesContent[fileName]	= content;
 				// to download slower
-				// setTimeout(function(){ next() }, 30)
-				next();
+				setTimeout(function(){ next() }, 60)
+				//next();
 			}.bind(this));
 		}.bind(this));
 	}.bind(this));
