@@ -1,3 +1,4 @@
+var main	= new Main();
 /**
  * 3 steps...
  * 1. setup options
@@ -21,20 +22,20 @@ var templateProcess	= function(template, data){
 	return eval("(function(){\n var data = "+JSON.stringify(data)+";\n var _buffer = '';\n"+jscode+"\nreturn _buffer;\n})()");
 }
 
-jQuery("#boilerplateOptions input").change(function(){
-	jQuery('#downloadButton').attr('disabled', 'disabled');
-});
-
-jQuery("#boilerplateOptions").submit(function(){
-	var form	= jQuery("#boilerplateOptions");
-	var data	= {
-		requireWebGL	: jQuery("[name='requireWebGL']", form).is(':checked')
-	};
-	console.log("data", JSON.stringify(data));
-	
-	jQuery('#downloadButton').attr('disabled', null);
-	return false;
-})
+//jQuery("#boilerplateOptions input").change(function(){
+//	jQuery('#downloadButton').attr('disabled', 'disabled');
+//});
+//
+//jQuery("#boilerplateOptions").submit(function(){
+//	var form	= jQuery("#boilerplateOptions");
+//	var data	= {
+//		requireWebGL	: jQuery("[name='requireWebGL']", form).is(':checked')
+//	};
+//	console.log("data", JSON.stringify(data));
+//	
+//	jQuery('#downloadButton').attr('disabled', null);
+//	return false;
+//})
 
 jQuery(function(){
 	return;

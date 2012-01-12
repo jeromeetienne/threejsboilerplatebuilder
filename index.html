@@ -8,8 +8,23 @@
 		</p>
 		<h1>options</h1>
 		<form id="boilerplateOptions">
-			<label>WebGL Required <input type="checkbox" name="requireWebGL"></label>
-			<br/>
+			<ul>
+				<li><label>WebGL Required <input type="checkbox" name="requireWebGL"></label></li>
+				<li><label>Stats.js included <input type="checkbox" name="includeStatsjs"></label></li>
+<!--				<li><label>Camera Control <select name="cameraControl">
+							<option>DragPanControls</option>
+							<option>TrackBall</option>
+						</select>
+					</label>
+				</li>
+				<li><label>Camera type <select name="cameraType">
+							<option>Perspective</option>
+							<option>Orthogonal</option>
+							<option>Base</option>
+						</select>
+					</label>
+				</li>
+-->			</ul>
 			<input type="submit" value="Build" />
 		</form>
 		<input type="button" value="Download" id="downloadButton" disabled/>
@@ -18,12 +33,12 @@
 
 		<script src="vendor/jszip/jszip.js"></script>
 
-		<script src="vendor/shorttag.js/lib/shorttag.js"></script>
 		<script src="vendor/gowiththeflow.js/gowiththeflow.js"></script>
 		<script src="templateFilelist.js"></script>
 
 		<script src="vendor/downloadify/js/swfobject.js"></script>
 		<script src="vendor/downloadify/js/downloadify.min.js"></script>
+		<script src="main.js"></script>
 		<script src="index.js"></script>
 
 	</body>

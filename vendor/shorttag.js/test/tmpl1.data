@@ -1,5 +1,0 @@
-wow " "
-	<? if(true){ ?>
-		<?= "captain" ?>
-	<? } ?>
-<?= 2+3 ?> prout
