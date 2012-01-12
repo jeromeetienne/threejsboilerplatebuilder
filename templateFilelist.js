@@ -6,7 +6,6 @@ var templateFilelist = [
 	"./Makefile",
 	"./README.md",
 	"./REVISION",
-	"./vendor/DragPanControls.js",
 	"./vendor/three.js/Detector.js",
 	"./vendor/three.js/RequestAnimationFrame.js",
 	"./vendor/three.js/Stats.js",
@@ -52,4 +51,5 @@ var templateFilelist = [
 	"./vendor/threex/threex.sparks.js",
 	"./vendor/threex/threex.texturePoolBall.js",
 	"./vendor/threex/THREEx.WindowResize.js",
+	"./vendor/threex.dragpancontrols.js",
 ];

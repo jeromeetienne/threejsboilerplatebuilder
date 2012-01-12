@@ -26,6 +26,9 @@ Main.prototype._buildZip	= function()
 	var dstDirname	= "boilerplate/"
 	
 	templateFilelist.forEach(function(fileName){
+
+if( fileName.match(/.*.gitignore/) )	return;
+
 		flow.seq(function(next, err, result){
 			var baseUrl	= "template/threejsboilerplate/";
 			var fileUrl	= baseUrl+fileName;
