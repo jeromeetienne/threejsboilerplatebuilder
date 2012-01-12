@@ -75,9 +75,9 @@ Main.prototype._buildZip	= function()
 	
 	templateFilelist.forEach(function(fileName){
 
-//if( fileName.match(/.*.gitignore/) )	return;
+if( fileName.match(/.*.gitignore/) )	return;
 
-		flow.seq(function(next, err, result){
+		flow.par(function(next, err, result){
 			var content	= this._filesContent[fileName];
 			console.log("processing", fileName)
 			
