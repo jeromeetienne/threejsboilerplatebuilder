@@ -47,35 +47,35 @@
 	<div class="container">
 		<div class="row">
 			<div class="span16">
-				<div id="preloadStatus">
-					<div class="section progress">
-						preloading file
-						<img src="images/busywheel.gif"/>
-					</div>
-					<div class="section done">
-						preloaded file
-					</div>
-				</div>
 				<form id="boilerplateOptions">
-					<ul>
-						<li><label>WebGL Required <input type="checkbox" name="requireWebGL"></label></li>
-						<li><label>Stats.js included <input type="checkbox" name="includeStatsjs"></label></li>
-		<!--				<li><label>Camera Control <select name="cameraControl">
-									<option>DragPanControls</option>
-									<option>TrackBall</option>
-								</select>
-							</label>
-						</li>
-						<li><label>Camera type <select name="cameraType">
-									<option>Perspective</option>
-									<option>Orthogonal</option>
-									<option>Base</option>
-								</select>
-							</label>
-						</li>
-		-->
-					</ul>
-					
+					<fieldset>						
+						<div class="clearfix">
+							<label>Renderer</label>
+							<div class="input">
+								<ul class="inputs-list">
+									<li>
+										<label>
+											<input type="checkbox" name="requireWebGL">
+											<span>WebGL is required</span>
+										</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="clearfix">
+							<label>Tools</label>
+							<div class="input">
+								<ul class="inputs-list">
+									<li>
+										<label>
+											<input type="checkbox" name="includeStatsjs">
+											<span>Stats.js is included</span>
+										</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</fieldset>
 					<div class="section progress">
 						building file
 						<img src="images/busywheel.gif"/>
@@ -88,6 +88,19 @@
 						<input type="submit" class="btn primary" value="Build"/>
 					</div>
 				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span16">
+				<div id="preloadStatus">
+					<div class="section progress">
+						preloading file
+						<img src="images/busywheel.gif"/>
+					</div>
+					<div class="section done">
+						preloaded file
+					</div>
+				</div>
 				<div id="downloadStatus">		
 					<div id="downloadify" class="section enable">
 						You must have Flash 10 installed to download this file.D
