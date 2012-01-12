@@ -1,0 +1,9 @@
+#preloadStatus .section {
+	display : none;
+}
+#downloadStatus .section {
+	display	: none;
+}
+#boilerplateOptions .section {
+	display	: none;				
+}

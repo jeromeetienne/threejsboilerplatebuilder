@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<link href="css/main.css"/>
+	</head>
+	<body>
+		<h1>Boilerplate for Three.js</h1>
+
+		<div id="preloadStatus">
+			<div class="section progress">
+				preloading file
+				<img src="images/busywheel.gif"/>
+			</div>
+			<div class="section done">
+				preloaded file
+			</div>
+		</div>
+		
+		<h1>options</h1>
+		<form id="boilerplateOptions">
+			<ul>
+				<li><label>WebGL Required <input type="checkbox" name="requireWebGL"></label></li>
+				<li><label>Stats.js included <input type="checkbox" name="includeStatsjs"></label></li>
+<!--				<li><label>Camera Control <select name="cameraControl">
+							<option>DragPanControls</option>
+							<option>TrackBall</option>
+						</select>
+					</label>
+				</li>
+				<li><label>Camera type <select name="cameraType">
+							<option>Perspective</option>
+							<option>Orthogonal</option>
+							<option>Base</option>
+						</select>
+					</label>
+				</li>
+-->
+			</ul>
+			
+			<div class="buildSection progress">
+				building file
+				<img src="images/busywheel.gif"/>
+			</div>
+			<div class="buildSection pending">
+				waiting to build
+				<img src="images/busywheel.gif"/>
+			</div>
+			<div class="buildSection idle">
+				<input type="submit" value="Build"/>
+			</div>
+		</form>
+		<div id="downloadStatus">		
+			<div id="downloadify" class="section enable">
+				You must have Flash 10 installed to download this file.D
+			</div>
+			<div class="section disable">
+				no download available now
+			</div>
+		</div>
+
+		<script src="vendor/jquery/jquery-1.7.1.min.js"></script>
+
+		<script src="vendor/jszip/jszip.js"></script>
+
+		<script src="vendor/gowiththeflow.js/gowiththeflow.js"></script>
+		<script src="templateFilelist.js"></script>
+
+		<script src="vendor/downloadify/js/swfobject.js"></script>
+		<script src="vendor/downloadify/js/downloadify.min.js"></script>
+
+		<script src="main.js"></script>
+		<script>new Main()</script>
+	</body>
+</html>

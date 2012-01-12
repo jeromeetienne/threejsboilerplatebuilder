@@ -1,46 +1,118 @@
-<html>
-	<head>
-	</head>
-	<body>
-		<h1>Boilerplate for Three.js</h1>
-		<p id="preloadStatus"></p>
-		<img src="images/busywheel.gif"/>
-		<p id="downloadify">
-			You must have Flash 10 installed to download this file.
-		</p>
-		<h1>options</h1>
-		<form id="boilerplateOptions">
-			<ul>
-				<li><label>WebGL Required <input type="checkbox" name="requireWebGL"></label></li>
-				<li><label>Stats.js included <input type="checkbox" name="includeStatsjs"></label></li>
-<!--				<li><label>Camera Control <select name="cameraControl">
-							<option>DragPanControls</option>
-							<option>TrackBall</option>
-						</select>
-					</label>
-				</li>
-				<li><label>Camera type <select name="cameraType">
-							<option>Perspective</option>
-							<option>Orthogonal</option>
-							<option>Base</option>
-						</select>
-					</label>
-				</li>
--->			</ul>
-			<input type="submit" value="Build" disabled/>
-		</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>boilerplate builder for three.js</title>
+	<meta name="description" content="boilerplate builder for three.js">
+	<meta name="author" content="jerome etienne">
 
-		<script src="vendor/jquery/jquery-1.7.1.min.js"></script>
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 
-		<script src="vendor/jszip/jszip.js"></script>
+	<!-- my own css -->
+	<link href="css/main.css" rel="stylesheet"/>
 
-		<script src="vendor/gowiththeflow.js/gowiththeflow.js"></script>
-		<script src="templateFilelist.js"></script>
+	<!-- Le styles -->
+	<link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		body {
+			padding-top: 60px;
+		}
+	</style>
 
-		<script src="vendor/downloadify/js/swfobject.js"></script>
-		<script src="vendor/downloadify/js/downloadify.min.js"></script>
-		<script src="main.js"></script>
-		<script src="index.js"></script>
+	<!-- Le fav and touch icons -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+</head>
 
-	</body>
+<body>
+
+	<div class="topbar">
+		<div class="fill">
+			<div class="container">
+				<a class="brand" href="/">boilerplate builder for three.js</a>
+				<ul class="nav">
+					<li class="active"><a href="/">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="span16">
+				<div id="preloadStatus">
+					<div class="section progress">
+						preloading file
+						<img src="images/busywheel.gif"/>
+					</div>
+					<div class="section done">
+						preloaded file
+					</div>
+				</div>
+				<form id="boilerplateOptions">
+					<ul>
+						<li><label>WebGL Required <input type="checkbox" name="requireWebGL"></label></li>
+						<li><label>Stats.js included <input type="checkbox" name="includeStatsjs"></label></li>
+		<!--				<li><label>Camera Control <select name="cameraControl">
+									<option>DragPanControls</option>
+									<option>TrackBall</option>
+								</select>
+							</label>
+						</li>
+						<li><label>Camera type <select name="cameraType">
+									<option>Perspective</option>
+									<option>Orthogonal</option>
+									<option>Base</option>
+								</select>
+							</label>
+						</li>
+		-->
+					</ul>
+					
+					<div class="section progress">
+						building file
+						<img src="images/busywheel.gif"/>
+					</div>
+					<div class="section pending">
+						waiting to build
+						<img src="images/busywheel.gif"/>
+					</div>
+					<div class="section idle">
+						<input type="submit" class="btn primary" value="Build"/>
+					</div>
+				</form>
+				<div id="downloadStatus">		
+					<div id="downloadify" class="section enable">
+						You must have Flash 10 installed to download this file.D
+					</div>
+					<div class="section disable">
+						no download available now
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div> <!-- /container -->
+
+
+	<script src="vendor/jquery/jquery-1.7.1.min.js"></script>
+
+	<script src="vendor/jszip/jszip.js"></script>
+
+	<script src="vendor/gowiththeflow.js/gowiththeflow.js"></script>
+	<script src="templateFilelist.js"></script>
+
+	<script src="vendor/downloadify/js/swfobject.js"></script>
+	<script src="vendor/downloadify/js/downloadify.min.js"></script>
+
+	<script src="main.js"></script>
+	<script>new Main()</script>
+</body>
 </html>

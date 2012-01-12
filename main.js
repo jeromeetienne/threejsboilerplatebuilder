@@ -3,16 +3,29 @@ var Main	= function()
 {
 	this._jszip		= new JSZip();
 	this._filesContent	= {};
+	this._buildOnPreloaded	= false;
 
+	this._preloaded		= false;
+	jQuery('#preloadStatus .section').hide().filter('.progress').show();
+
+	this._preloadStart();
+
+	this._buildEnable();
+	this._downloadDisable();
+	
 	jQuery("#boilerplateOptions").submit(function(){
-	     	this._buildZip();
+		if( this._preloaded ){
+		     	this._buildZip();			
+		}else{
+			this._buildOnPreloaded	= true;
+			jQuery('#boilerplateOptions .section').hide();
+			jQuery('#boilerplateOptions .section.pending').show();
+		}
 		return false;
 	}.bind(this));
 	jQuery("#boilerplateOptions input").change(function(){
 		this._downloadDisable();
 	}.bind(this));
-	
-	this._preloadStart();
 }
 
 Main.prototype.destroy	= function()
@@ -23,45 +36,51 @@ Main.prototype.destroy	= function()
 //										//
 //////////////////////////////////////////////////////////////////////////////////
 
-Main.prototype._preloadDone	= function()
-{
-	return this._preloaded === true ? true : false;
-}
 Main.prototype._preloadStart	= function()
 {
 	var flow	= Flow();
 	var dstDirname	= "boilerplate/"
 
-	this._preloaded	= false;
-	jQuery('#preloadStatus').text('preloading file');
-	this._buildDisable();
-	
 	templateFilelist.forEach(function(fileName){
 
+// TODO this seems to be a github workaround.. not sure at all
+// retest
 if( fileName.match(/.*.gitignore/) )	return;
 
 		flow.seq(function(next, err, result){
 			var baseUrl	= "template/threejsboilerplate/";
 			var fileUrl	= baseUrl+fileName;
-			console.log("start loading", fileUrl);
+			//console.log("start loading", fileUrl);
 			jQuery.ajax({
 				url	: fileUrl,
 				dataType: "text" 
 			}).error(function(jqXHR, status){
 				console.assert(false, "ERROR loading " + fileName)
 			}.bind(this)).success(function(content){
-				console.log("file", fileName, "preloaded...")
+				//console.log("file", fileName, "preloaded...")
 				this._filesContent[fileName]	= content;
+				// to download slower
+				// setTimeout(function(){ next() }, 30)
 				next();
 			}.bind(this));
 		}.bind(this));
 	}.bind(this));
 	
 	flow.seq(function(next, err, result){
-		this._preloaded	= true;
-		jQuery('#preloadStatus').text('file preloaded');
-		this._buildEnable();
+		this._onPreloaded();
 	}.bind(this));
+}
+
+Main.prototype._onPreloaded	= function()
+{
+	this._preloaded	= true;
+	jQuery('#preloadStatus .section').hide();
+	jQuery('#preloadStatus .section.done').show();
+
+	if( this._buildOnPreloaded ){
+		this._buildOnPreloaded	= false;
+		this._buildZip();
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -79,12 +98,13 @@ if( fileName.match(/.*.gitignore/) )	return;
 
 		flow.par(function(next, err, result){
 			var content	= this._filesContent[fileName];
-			console.log("processing", fileName)
+			//console.log("processing", fileName)
 			
+			// TODO should not be hardcoded
 			if( fileName === "./index.html" ){
 				var tmplOptions	= this._collectOptions();
 				content		= this._templateProcess(content, tmplOptions);
-				console.log("content", fileName, content)
+				//console.log("content", fileName, content)
 			}
 			
 			var dstName	= dstDirname + fileName;
@@ -100,19 +120,19 @@ if( fileName.match(/.*.gitignore/) )	return;
 		//var content	= this._jszip.generate();
 		//location.href	="data:application/zip;base64,"+content;
 		this._downloadEnable();
+
+		jQuery('#boilerplateOptions .section').hide();
+		jQuery('#boilerplateOptions .section.idle').show();
 	}.bind(this));
 }
 
 Main.prototype._buildEnable	= function()
 {
 	jQuery('#boilerplateOptions input[type="submit"]').attr('disabled', null);
-}
 
-Main.prototype._buildDisable	= function()
-{
-	jQuery('#boilerplateOptions input[type="submit"]').attr('disabled', "disabled");
+	jQuery('#boilerplateOptions .section').hide();
+	jQuery('#boilerplateOptions .section.idle').show();
 }
-
 
 //////////////////////////////////////////////////////////////////////////////////
 //										//
@@ -134,7 +154,7 @@ Main.prototype._templateProcess	= function(template, data){
 	jscode	= "(function(){\n var data = "+JSON.stringify(data)+";\n var _buffer = '';\n"
 			+ jscode
 			+ "\nreturn _buffer;\n})()";
-	console.log("jscode", jscode);
+	//console.log("jscode", jscode);
 	return eval(jscode);
 }
 
@@ -162,22 +182,24 @@ Main.prototype._collectOptions	= function()
 
 Main.prototype._downloadEnable	= function()
 {
-	//jQuery('#downloadButton').attr('disabled', null);
+	// show section
+	jQuery('#downloadStatus .section').hide().filter('.enable').show();
+	// enable downloadify
 	Downloadify.create('downloadify',{
 		filename: function(){
 			return "threejsboilerplate.zip";
 		},
-		data: function(){ 
+		data: function(){
 			return this._jszip.generate();
 		}.bind(this),
 		onComplete: function(){ 
-			alert('Your File Has Been Saved!'); 
+			console.log('Your File Has Been Saved!'); 
 		},
 		onCancel: function(){ 
-			alert('You have cancelled the saving of this file.');
+			console.log('You have cancelled the saving of this file.');
 		},
 		onError: function(){ 
-			alert('You must put something in the File Contents or there will be nothing to save!'); 
+			console.log('You must put something in the File Contents or there will be nothing to save!'); 
 		},
 		transparentf	: false,
 		swf		: 'vendor/downloadify/media/downloadify.swf',
@@ -192,7 +214,9 @@ Main.prototype._downloadEnable	= function()
 
 Main.prototype._downloadDisable	= function()
 {
-	//jQuery('#downloadButton').attr('disabled', 'disabled');	
-	jQuery('#downloadify').empty().text("no download");	
+	// show section
+	jQuery('#downloadStatus .section').hide().filter('.disable').show();
+	// remove downloadify if needed
+	jQuery('#downloadify').empty();
 }
 
