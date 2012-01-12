@@ -1,9 +1,15 @@
 var main	= new Main();
 /**
  * 3 steps...
+ * 0. preload the files
+ *    - enable build button once preloaded
  * 1. setup options
+ *    - any change disable download button
  * 2. build bundle
+ *    - init the jszip
+ *    - enable download button
  * 3. download bundle
+ *    - download the files
 */
 
 var templateProcess	= function(template, data){

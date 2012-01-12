@@ -1,7 +1,8 @@
 /** @namespace */
 var Main	= function()
 {
-	this._jszip	= new JSZip();
+	this._jszip		= new JSZip();
+	this._filesContent	= {};
 
 	jQuery("#boilerplateOptions").submit(function(){
 	     	this._buildZip();
@@ -10,10 +11,57 @@ var Main	= function()
 	jQuery("#boilerplateOptions input").change(function(){
 		this._downloadDisable();
 	}.bind(this));
+	
+	this._preloadStart();
 }
 
 Main.prototype.destroy	= function()
 {	
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+//										//
+//////////////////////////////////////////////////////////////////////////////////
+
+Main.prototype._preloadDone	= function()
+{
+	return this._preloaded === true ? true : false;
+}
+Main.prototype._preloadStart	= function()
+{
+	var flow	= Flow();
+	var dstDirname	= "boilerplate/"
+
+	this._preloaded	= false;
+	jQuery('#preloadStatus').text('preloading file');
+	this._buildDisable();
+	
+	templateFilelist.forEach(function(fileName){
+
+if( fileName.match(/.*.gitignore/) )	return;
+
+		flow.seq(function(next, err, result){
+			var baseUrl	= "template/threejsboilerplate/";
+			var fileUrl	= baseUrl+fileName;
+			console.log("start loading", fileUrl);
+			jQuery.ajax({
+				url	: fileUrl,
+				dataType: "text" 
+			}).error(function(jqXHR, status){
+				console.assert(false, "ERROR loading " + fileName)
+			}.bind(this)).success(function(content){
+				console.log("file", fileName, "preloaded...")
+				this._filesContent[fileName]	= content;
+				next();
+			}.bind(this));
+		}.bind(this));
+	}.bind(this));
+	
+	flow.seq(function(next, err, result){
+		this._preloaded	= true;
+		jQuery('#preloadStatus').text('file preloaded');
+		this._buildEnable();
+	}.bind(this));
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -27,33 +75,23 @@ Main.prototype._buildZip	= function()
 	
 	templateFilelist.forEach(function(fileName){
 
-if( fileName.match(/.*.gitignore/) )	return;
+//if( fileName.match(/.*.gitignore/) )	return;
 
 		flow.seq(function(next, err, result){
-			var baseUrl	= "template/threejsboilerplate/";
-			var fileUrl	= baseUrl+fileName;
-			console.log("start loading", fileUrl);
-			jQuery.ajax({
-				url	: fileUrl,
-				dataType: "text",
-				cache	: false, 
-			}).error(function(jqXHR, status){
-				console.assert(false, "ERROR loading " + fileName)
-			}.bind(this)).success(function(content){
-				console.log("file", fileName, "loaded... adding content to zip")
-				
-				if( fileName === "./index.html" ){
-					var tmplOptions	= this._collectOptions();
-					content		= this._templateProcess(content, tmplOptions);
-					console.log("content", fileName, content)
-				}
-				
-				var dstName	= dstDirname + fileName;
-				var dirName	= dstName.substr(0, dstName.lastIndexOf('/'));
-				this._jszip.folder(dirName);
-				this._jszip.add(dstName, content);
-				next();
-			}.bind(this));
+			var content	= this._filesContent[fileName];
+			console.log("processing", fileName)
+			
+			if( fileName === "./index.html" ){
+				var tmplOptions	= this._collectOptions();
+				content		= this._templateProcess(content, tmplOptions);
+				console.log("content", fileName, content)
+			}
+			
+			var dstName	= dstDirname + fileName;
+			var dirName	= dstName.substr(0, dstName.lastIndexOf('/'));
+			this._jszip.folder(dirName);
+			this._jszip.add(dstName, content);
+			next();
 		}.bind(this));
 	}.bind(this));
 	
@@ -64,6 +102,17 @@ if( fileName.match(/.*.gitignore/) )	return;
 		this._downloadEnable();
 	}.bind(this));
 }
+
+Main.prototype._buildEnable	= function()
+{
+	jQuery('#boilerplateOptions input[type="submit"]').attr('disabled', null);
+}
+
+Main.prototype._buildDisable	= function()
+{
+	jQuery('#boilerplateOptions input[type="submit"]').attr('disabled', "disabled");
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////
 //										//
