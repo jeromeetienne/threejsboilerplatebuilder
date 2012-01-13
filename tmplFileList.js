@@ -1,0 +1,3 @@
+var tmplFileList = [
+	"./index.html",
+];
