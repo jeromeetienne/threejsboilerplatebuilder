@@ -35,9 +35,10 @@
 	<div class="topbar">
 		<div class="fill">
 			<div class="container">
-				<a class="brand" href="/">Boilerplate Builder for three.js</a>
+				<a class="brand" href="#home">Boilerplate Builder for three.js</a>
 				<ul class="nav">
-					<li class="active"><a href="/">Home</a></li>
+					<li><a href="#home">Home</a></li>
+					<li><a href="#builder">Builder</a></li>
 					<li><a href="#about">About</a></li>
 				</ul>
 			</div>
@@ -45,8 +46,12 @@
 	</div>
 
 	<div class="container">
-		<div class="row">
+		<!-- ************************************************************ -->
+		<!-- *		Builder Section					* -->
+		<!-- ************************************************************ -->
+		<div class="row"><a name="builder"></a>
 			<div class="span8">
+				<h2>Options</h2>
 				<form id="boilerplateOptions">
 					<fieldset>						
 						<div class="clearfix">
@@ -131,8 +136,21 @@
 				</div>
 
 			</div>
-			<div class="span8" id="buildPreview"></div>
-		</div>		
+			<div class="span8">
+				<h2>Preview</h2>
+				<div id="buildPreview">					
+				</div>
+			</div>
+		</div>
+		
+		<!-- ************************************************************ -->
+		<!-- *		About Section					* -->
+		<!-- ************************************************************ -->
+		<div class="row"><a name="about"></a>
+			<h1>About</h1>
+			This is a builder for a <a href="http://github.com/jeromeetienne/threejsboilerplate">boilerplate for three.js</a>.
+			You can find more <a href="http://learningthreejs.com/blog/2011/12/20/boilerplate-for-three-js/">doc here</a>
+		</div>
 	</div> <!-- /container -->
 
 

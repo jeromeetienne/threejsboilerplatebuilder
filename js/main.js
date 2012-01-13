@@ -112,6 +112,8 @@ if( fileName.match(/.*.gitignore/) )	return;
 // handle preview  
 (function(content){
 	var baseUrl	= window.location.href;
+	// remove hash part if any
+	baseUrl		= baseUrl.replace(window.location.hash, '');
 	content	= content.replace(/src="/g	, "src=\""	+baseUrl + "./data/boilerplate.orig/")
 	content	= content.replace(/href="/g	, "href=\""	+baseUrl + "./data/boilerplate.orig/")
 	console.log("content", content);
