@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>boilerplate builder for three.js</title>
+	<title>Boilerplate Builder for three.js</title>
 	<meta name="description" content="boilerplate builder for three.js">
 	<meta name="author" content="jerome etienne">
 
@@ -21,6 +21,7 @@
 			padding-top: 60px;
 		}
 	</style>
+	
 
 	<!-- Le fav and touch icons -->
 	<link rel="shortcut icon" href="images/favicon.ico">
@@ -34,7 +35,7 @@
 	<div class="topbar">
 		<div class="fill">
 			<div class="container">
-				<a class="brand" href="/">boilerplate builder for three.js</a>
+				<a class="brand" href="/">Boilerplate Builder for three.js</a>
 <!--				<ul class="nav">
 					<li class="active"><a href="/">Home</a></li>
 					<li><a href="#about">About</a></li>
@@ -46,19 +47,18 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="span16">
+			<div class="span8">
 				<form id="boilerplateOptions">
 					<fieldset>						
 						<div class="clearfix">
 							<label>Renderer</label>
 							<div class="input">
 								<ul class="inputs-list">
-									<li>
-										<label>
-											<input type="checkbox" name="requireWebGL">
-											<span>WebGL is required</span>
-										</label>
-									</li>
+									<li><label rel="popover" data-original-title="WebGL is required ?"
+										data-content="pick this one if your project require WebGL">
+										<input type="checkbox" name="requireWebGL">
+										<span>WebGL is required</span>
+									</label></li>
 								</ul>
 							</div>
 						</div>
@@ -66,12 +66,11 @@
 							<label>Tools</label>
 							<div class="input">
 								<ul class="inputs-list">
-									<li>
-										<label>
-											<input type="checkbox" name="includeStatsjs">
-											<span>Stats.js is included</span>
-										</label>
-									</li>
+									<li><label rel="popover" data-original-title="include Stats.js ?"
+										data-content="stats.js is a small library to monitor performance.">
+										<input type="checkbox" name="includeStatsjs">
+										<span>Stats.js is included</span>
+									</label></li>
 								</ul>
 							</div>
 						</div>
@@ -116,6 +115,11 @@
 
 
 	<script src="vendor/jquery/jquery-1.7.1.min.js"></script>
+
+	<script src="vendor/bootstrap/js/bootstrap-twipsy.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap-popover.js"></script>
+	<script>jQuery("[rel='popover']").popover()</script>
+
 
 	<script src="vendor/jszip/jszip.js"></script>
 
