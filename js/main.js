@@ -106,7 +106,7 @@ if( fileName.match(/.*.gitignore/) )	return;
 				var tmplOptions	= this._collectOptions();
 				content		= this._templateProcess(content, tmplOptions);
 				console.log("content", fileName, content);
-// handle preview
+// handle preview 
 (function(content){
 	var baseUrl	= window.location.href;
 	content	= content.replace(/src="/g, "src=\""+baseUrl+"../template/boilerplate.orig/")
