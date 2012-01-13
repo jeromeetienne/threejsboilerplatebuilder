@@ -15,7 +15,7 @@ clean:	cleanOrigFileList cleanTmplFileList
 
 buildOrigFileList:
 	echo "var origFileList = ["	> origFileList.js
-	(cd template/boilerplate.orig/ && find . -type f | awk '{print "\t\""$$1"\","}' | tee -a ../../origFileList.js)
+	(cd data/boilerplate.orig/ && find . -type f | awk '{print "\t\""$$1"\","}' | tee -a ../../origFileList.js)
 	echo "];"			>> origFileList.js
 
 cleanOrigFileList:
@@ -23,7 +23,7 @@ cleanOrigFileList:
 
 buildTmplFileList:
 	echo "var tmplFileList = ["	> tmplFileList.js
-	(cd template/boilerplate.tmpl/ && find . -type f | awk '{print "\t\""$$1"\","}' | tee -a ../../tmplFileList.js)
+	(cd data/boilerplate.tmpl/ && find . -type f | awk '{print "\t\""$$1"\","}' | tee -a ../../tmplFileList.js)
 	echo "];"			>> tmplFileList.js
 
 cleanTmplFileList:

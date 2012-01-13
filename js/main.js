@@ -3,7 +3,7 @@ var Main	= function()
 {
 	this._jszip		= new JSZip();
 	this._filesContent	= {};
-	this._buildOnPreloaded	= false;
+	this._buildOnPreloaded	= true;	// false;
 
 	this._preloaded		= false;
 	jQuery('#preloadStatus .section').hide().filter('.progress').show();
@@ -24,7 +24,10 @@ var Main	= function()
 		return false;
 	}.bind(this));
 	jQuery("#boilerplateOptions input").change(function(){
+		// disable the download as it is now invalid
 		this._downloadDisable();
+		// rebuild for live update
+		if( this._preloaded )	this._buildZip();			
 	}.bind(this));
 }
 
@@ -49,7 +52,7 @@ if( fileName.match(/.*.gitignore/) )	return;
 
 		flow.seq(function(next, err, result){
 			var hasTmpl	= tmplFileList.indexOf(fileName) !== -1 ? true : false;
-			var baseUrl	= "template/boilerplate."+ (hasTmpl ? "tmpl/" : "orig/");
+			var baseUrl	= "data/boilerplate."+ (hasTmpl ? "tmpl/" : "orig/");
 			var fileUrl	= baseUrl+fileName;
 			//console.log("start loading", fileUrl);
 			jQuery.ajax({
@@ -109,8 +112,8 @@ if( fileName.match(/.*.gitignore/) )	return;
 // handle preview  
 (function(content){
 	var baseUrl	= window.location.href;
-	content	= content.replace(/src="/g, "src=\""+baseUrl+"../template/boilerplate.orig/")
-	content	= content.replace(/href="/g, "href=\""+baseUrl+"../template/boilerplate.orig/")
+	content	= content.replace(/src="/g	, "src=\""	+baseUrl + "./data/boilerplate.orig/")
+	content	= content.replace(/href="/g	, "href=\""	+baseUrl + "./data/boilerplate.orig/")
 	console.log("content", content);
 	// build the data url itself
 	var url = "data:text/html;base64,"+window.btoa(content);

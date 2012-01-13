@@ -103,6 +103,10 @@
 			var geometry	= new THREE.CubeGeometry( 2, 2, 2 );
 		//? }else console.assert(false, 'objectGeometry value is invalid');
 
+var light = new THREE.DirectionalLight( 0xffffff );
+light.position.set( 1, 1, 1 ).normalize();
+scene.add( light );
+
 		//? if(data.objectMaterial === 'lambert' ){
 			var material	= new THREE.MeshLambertMaterial({color: Math.random() * 0xffffff});
 		//? }else if(data.objectMaterial === 'phong' ){
