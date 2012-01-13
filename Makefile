@@ -10,21 +10,21 @@ deploy: build
 	git commit -a -m "New deploy" && git push -f origin HEAD:gh-pages && git reset HEAD~
 
 
-build:	buildOrigFilelist buildTmplFilelist 
-clean:	cleanOrigFilelist cleanTmplFilelist
+build:	buildOrigFileList buildTmplFileList 
+clean:	cleanOrigFileList cleanTmplFileList
 
-buildOrigFilelist:
+buildOrigFileList:
 	echo "var origFileList = ["	> origFileList.js
 	(cd template/boilerplate.orig/ && find . -type f | awk '{print "\t\""$$1"\","}' | tee -a ../../origFileList.js)
 	echo "];"			>> origFileList.js
 
-cleanOrigFilelist:
+cleanOrigFileList:
 	rm origFileList.js
 
-buildTmplFilelist:
+buildTmplFileList:
 	echo "var tmplFileList = ["	> tmplFileList.js
 	(cd template/boilerplate.tmpl/ && find . -type f | awk '{print "\t\""$$1"\","}' | tee -a ../../tmplFileList.js)
 	echo "];"			>> tmplFileList.js
 
-cleanTmplFilelist:
+cleanTmplFileList:
 	rm tmplFileList.js
