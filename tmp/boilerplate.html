@@ -10,10 +10,8 @@
 		<script src="vendor/three.js/Detector.js"></script>
 		<!-- see details at http://paulirish.com/2011/requestanimationframe-for-smart-animating/ -->
 		<script src="vendor/three.js/RequestAnimationFrame.js"></script>
-	//? if(data.includeStatsjs){
 		<!-- https://github.com/mrdoob/stats.js -->
 		<script src="vendor/three.js/Stats.js"></script>
-	//? }
 
 		<script src="vendor/threex/THREEx.screenshot.js"></script>
 		<script src="vendor/threex/THREEx.FullScreen.js"></script>
@@ -53,26 +51,21 @@
 					preserveDrawingBuffer	: true	// to allow screenshot
 				});
 				renderer.setClearColorHex( 0xBBBBBB, 1 );
-		//? if(data.requireWebGL){
-			}else{
-				Detector.addGetWebGLMessage();
-				return true;
-			}
-		//? }else{
+			// uncomment if webgl is required
+			//}else{
+			//	Detector.addGetWebGLMessage();
+			//	return true;
 			}else{
 				renderer	= new THREE.CanvasRenderer();
 			}
-		//? }
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.getElementById('container').appendChild(renderer.domElement);
 
-		//? if(data.includeStatsjs){
 			// add Stats.js - https://github.com/mrdoob/stats.js
 			stats = new Stats();
 			stats.domElement.style.position	= 'absolute';
 			stats.domElement.style.bottom	= '0px';
 			document.body.appendChild( stats.domElement );
-		//? }
 
 			// create a scene
 			scene = new THREE.Scene();
@@ -98,13 +91,7 @@
 			// here you add your objects
 			// - you will most likely replace this part by your own
 			var geometry	= new THREE.TorusGeometry( 1, 0.42 );
-		//? if(data.objectMaterial === 'lambert' ){
-			var material	= new THREE.MeshLambertMaterial({color: Math.random() * 0xffffff});
-		//? }else if(data.objectMaterial === 'phong' ){
-			var material	= new THREE.MeshPhongMaterial({color: Math.random() * 0xffffff});
-		//? }else if(data.objectMaterial === 'normal' ){
 			var material	= new THREE.MeshNormalMaterial();
-		//? }else console.assert(false, 'objectMaterial value is invalid');
 			var mesh	= new THREE.Mesh( geometry, material );
 			scene.add( mesh );
 		}
@@ -120,10 +107,8 @@
 			// do the render
 			render();
 
-		//? if(data.includeStatsjs){
 			// update stats
 			stats.update();
-		//? }
 		}
 
 		// render the scene

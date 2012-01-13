@@ -105,7 +105,21 @@ if( fileName.match(/.*.gitignore/) )	return;
 			if( hasTmpl ){
 				var tmplOptions	= this._collectOptions();
 				content		= this._templateProcess(content, tmplOptions);
-				console.log("content", fileName, content)
+				console.log("content", fileName, content);
+// handle preview
+(function(content){
+	var baseUrl	= window.location.href;
+	content	= content.replace(/src="/g, "src=\""+baseUrl+"../template/boilerplate.orig/")
+	content	= content.replace(/href="/g, "href=\""+baseUrl+"../template/boilerplate.orig/")
+	console.log("content", content);
+	var url = "data:text/html;base64,"+window.btoa(content);
+	jQuery('#buildPreview').empty();
+	jQuery("<iframe>").attr({
+		src	: url,
+		width	: "100%",
+		height	: "320px"
+	}).appendTo('#buildPreview');	
+}(content));
 			}
 			
 			var dstName	= dstDirname + fileName;
