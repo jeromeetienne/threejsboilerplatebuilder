@@ -97,7 +97,12 @@
 
 			// here you add your objects
 			// - you will most likely replace this part by your own
+		//? if(data.objectGeometry === 'torus' ){
 			var geometry	= new THREE.TorusGeometry( 1, 0.42 );
+		//? }else if(data.objectGeometry === 'cube' ){
+			var geometry	= new THREE.CubeGeometry( 2, 2, 2 );
+		//? }else console.assert(false, 'objectGeometry value is invalid');
+
 		//? if(data.objectMaterial === 'lambert' ){
 			var material	= new THREE.MeshLambertMaterial({color: Math.random() * 0xffffff});
 		//? }else if(data.objectMaterial === 'phong' ){

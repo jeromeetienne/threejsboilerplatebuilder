@@ -106,15 +106,20 @@ if( fileName.match(/.*.gitignore/) )	return;
 				var tmplOptions	= this._collectOptions();
 				content		= this._templateProcess(content, tmplOptions);
 				console.log("content", fileName, content);
-// handle preview 
+// handle preview  
 (function(content){
 	var baseUrl	= window.location.href;
 	content	= content.replace(/src="/g, "src=\""+baseUrl+"../template/boilerplate.orig/")
 	content	= content.replace(/href="/g, "href=\""+baseUrl+"../template/boilerplate.orig/")
 	console.log("content", content);
+	// build the data url itself
 	var url = "data:text/html;base64,"+window.btoa(content);
+	// create the iframe for the preview
 	jQuery('#buildPreview').empty();
 	jQuery("<iframe>").attr({
+		allowfullscreen	: true,
+		webkitallowfullscreen	: true,
+		mozallowfullscreen	: true,
 		src	: url,
 		width	: "100%",
 		height	: "320px"
@@ -189,7 +194,8 @@ Main.prototype._collectOptions	= function()
 	var options	= {
 		requireWebGL	: checkbox('requireWebGL'),
 		includeStatsjs	: checkbox('includeStatsjs'),
-		objectMaterial	: radio('objectMaterial')
+		objectMaterial	: radio('objectMaterial'),
+		objectGeometry	: radio('objectGeometry')
 	};
 	console.log("data", JSON.stringify(options));
 	return options;
