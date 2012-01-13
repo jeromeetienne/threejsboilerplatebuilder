@@ -1,3 +1,0 @@
-var tmplFileList = [
-	"./index.html",
-];
