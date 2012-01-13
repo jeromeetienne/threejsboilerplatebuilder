@@ -1,4 +1,4 @@
-var templateFilelist = [
+var origFileList = [
 	"./css/main.css",
 	"./images/.gitignore",
 	"./index.html",

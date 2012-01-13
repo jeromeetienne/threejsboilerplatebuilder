@@ -41,14 +41,15 @@ Main.prototype._preloadStart	= function()
 	var flow	= Flow();
 	var dstDirname	= "boilerplate/"
 
-	templateFilelist.forEach(function(fileName){
+	origFileList.forEach(function(fileName){
 
 // TODO this seems to be a github workaround.. not sure at all
 // retest
 if( fileName.match(/.*.gitignore/) )	return;
 
 		flow.seq(function(next, err, result){
-			var baseUrl	= "template/threejsboilerplate/";
+			var hasTmpl	= tmplFileList.indexOf(fileName) !== -1 ? true : false;
+			var baseUrl	= "template/boilerplate."+ (hasTmpl ? "tmpl/" : "orig/");
 			var fileUrl	= baseUrl+fileName;
 			//console.log("start loading", fileUrl);
 			jQuery.ajax({
@@ -92,7 +93,7 @@ Main.prototype._buildZip	= function()
 	var flow	= Flow();
 	var dstDirname	= "boilerplate/"
 	
-	templateFilelist.forEach(function(fileName){
+	origFileList.forEach(function(fileName){
 
 if( fileName.match(/.*.gitignore/) )	return;
 
@@ -100,11 +101,11 @@ if( fileName.match(/.*.gitignore/) )	return;
 			var content	= this._filesContent[fileName];
 			//console.log("processing", fileName)
 			
-			// TODO should not be hardcoded
-			if( fileName === "./index.html" ){
+			var hasTmpl	= tmplFileList.indexOf(fileName) !== -1 ? true : false;
+			if( hasTmpl ){
 				var tmplOptions	= this._collectOptions();
 				content		= this._templateProcess(content, tmplOptions);
-				//console.log("content", fileName, content)
+				console.log("content", fileName, content)
 			}
 			
 			var dstName	= dstDirname + fileName;
@@ -165,12 +166,16 @@ Main.prototype._templateProcess	= function(template, data){
 Main.prototype._collectOptions	= function()
 {
 	var form	= jQuery("#boilerplateOptions");
-	var radio	= function(name){
+	var checkbox	= function(name){
 		return jQuery("[name='"+name+"']", form).is(':checked')
 	};
+	var radio	= function(name){
+		return jQuery("[name='"+name+"']:checked", form).val()
+	};
 	var options	= {
-		requireWebGL	: radio('requireWebGL'),
-		includeStatsjs	: radio('includeStatsjs')
+		requireWebGL	: checkbox('requireWebGL'),
+		includeStatsjs	: checkbox('includeStatsjs'),
+		objectMaterial	: radio('objectMaterial')
 	};
 	console.log("data", JSON.stringify(options));
 	return options;
