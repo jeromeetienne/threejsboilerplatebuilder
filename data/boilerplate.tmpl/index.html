@@ -97,20 +97,54 @@
 
 			// here you add your objects
 			// - you will most likely replace this part by your own
+
+		//? /************************************************************/
+		//? /*		Handle light					*/
+		//? /************************************************************/
+		//? if(data.ambientLight ){
+			var light	= new THREE.AmbientLight( Math.random() * 0xffffff );
+			scene.add( light );
+		//? }
+		//? if(data.nDirectionalLights > 0 ){
+			var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
+			light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
+			scene.add( light );
+		//? }
+		//? if(data.nDirectionalLights > 1 ){
+			var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
+			light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
+			scene.add( light );
+		//? }
+		//? if(data.nDirectionalLights > 2 ){
+			var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
+			light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
+			scene.add( light );
+		//? }
+		//? if(data.nPointLights > 0 ){
+			var light	= new THREE.PointLight( Math.random() * 0xffffff );
+			light.position.set( Math.random(), Math.random(), Math.random() );
+			scene.add( light );
+		//? }
+		//? if(data.nPointLights > 1 ){
+			var light	= new THREE.PointLight( Math.random() * 0xffffff );
+			light.position.set( Math.random(), Math.random(), Math.random() );
+			scene.add( light );
+		//? }
+		//? if(data.nPointLights > 2 ){
+			var light	= new THREE.PointLight( Math.random() * 0xffffff );
+			light.position.set( Math.random(), Math.random(), Math.random() );
+			scene.add( light );
+		//? }
+
 		//? if(data.objectGeometry === 'torus' ){
 			var geometry	= new THREE.TorusGeometry( 1, 0.42 );
 		//? }else if(data.objectGeometry === 'cube' ){
 			var geometry	= new THREE.CubeGeometry( 2, 2, 2 );
 		//? }else console.assert(false, 'objectGeometry value is invalid');
-
-var light = new THREE.DirectionalLight( 0xffffff );
-light.position.set( 1, 1, 1 ).normalize();
-scene.add( light );
-
 		//? if(data.objectMaterial === 'lambert' ){
-			var material	= new THREE.MeshLambertMaterial({color: Math.random() * 0xffffff});
+			var material	= new THREE.MeshLambertMaterial({ambient: 0x808080, color: Math.random() * 0xffffff});
 		//? }else if(data.objectMaterial === 'phong' ){
-			var material	= new THREE.MeshPhongMaterial({color: Math.random() * 0xffffff});
+			var material	= new THREE.MeshPhongMaterial({ambient: 0x808080, color: Math.random() * 0xffffff});
 		//? }else if(data.objectMaterial === 'normal' ){
 			var material	= new THREE.MeshNormalMaterial();
 		//? }else console.assert(false, 'objectMaterial value is invalid');

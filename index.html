@@ -74,6 +74,8 @@
 								</label></li>
 							</ul></div>
 						</div>
+					<fieldset>
+						<legend>Object</legend>
 						<div class="clearfix">
 							<label>Object Material</label>
 							<div class="input"><ul class="inputs-list">
@@ -104,6 +106,36 @@
 							</label></li>
 							</ul></div>
 						</div><!-- /clearfix -->
+
+					</fieldset>
+					<fieldset>
+						<legend>Lights</legend>
+						<div class="clearfix">
+							<label for="nDirectionalLights">Directional</label>
+							<div class="input"><select name="nDirectionalLights">
+							    <option>0</option>
+							    <option>1</option>
+							    <option>2</option>
+							    <option>3</option>
+							</select></div>
+						</div><!-- /clearfix -->
+						<div class="clearfix">
+							<label for="nPointLights">Points</label>
+							<div class="input"><select name="nPointLights">
+							    <option>0</option>
+							    <option>1</option>
+							    <option>2</option>
+							    <option>3</option>
+							</select></div>
+						</div><!-- /clearfix -->
+						<div class="clearfix">
+							<label>Ambient</label>
+							<div class="input"><ul class="inputs-list">
+								<li><label>
+									<input type="checkbox" name="ambientLight">
+								</label></li>
+							</ul></div>
+						</div>
 					</fieldset>
 					<div class="section progress">
 						building file
@@ -134,7 +166,6 @@
 						no download available now
 					</div>
 				</div>
-
 			</div>
 			<div class="span8">
 				<h2>Preview</h2>
@@ -166,6 +197,19 @@
 		</div>
 	</div> <!-- /container -->
 
+	<footer class="footer">
+		<div class="container">
+			<p class="pull-right"><a href="#">Back to top</a></p>
+			<p>
+				Designed and built with all the love in the world to ease the first contact with
+				<a href="https://github.com/mrdoob/three.js">three.js</a>
+				by
+				<a href="http://twitter.com/jerome_etienne" target="_blank">@jerome_etienne</a>.
+				Code licensed under the
+				<a href="http://jetienne.mit-license.org/" target="_blank">MIT license</a>.
+			</p>
+		</div>
+	</footer>
 
 	<script src="vendor/jquery/jquery-1.7.1.min.js"></script>
 

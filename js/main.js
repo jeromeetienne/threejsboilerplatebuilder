@@ -23,7 +23,7 @@ var Main	= function()
 		}
 		return false;
 	}.bind(this));
-	jQuery("#boilerplateOptions input").change(function(){
+	jQuery("#boilerplateOptions input").add("#boilerplateOptions select").change(function(){
 		// disable the download as it is now invalid
 		this._downloadDisable();
 		// rebuild for live update
@@ -46,8 +46,7 @@ Main.prototype._preloadStart	= function()
 
 	origFileList.forEach(function(fileName){
 
-// TODO this seems to be a github workaround.. not sure at all
-// retest
+// FIXME this seems to be a github workaround.. not sure at all - to retest
 if( fileName.match(/.*.gitignore/) )	return;
 
 		flow.seq(function(next, err, result){
@@ -98,6 +97,7 @@ Main.prototype._buildZip	= function()
 	
 	origFileList.forEach(function(fileName){
 
+// FIXME this seems to be a github workaround.. not sure at all - to retest
 if( fileName.match(/.*.gitignore/) )	return;
 
 		flow.par(function(next, err, result){
@@ -109,6 +109,8 @@ if( fileName.match(/.*.gitignore/) )	return;
 				var tmplOptions	= this._collectOptions();
 				content		= this._templateProcess(content, tmplOptions);
 				console.log("content", fileName, content);
+
+// FIXME write the preview cleanly
 // handle preview  
 (function(content){
 	var baseUrl	= window.location.href;
@@ -116,7 +118,7 @@ if( fileName.match(/.*.gitignore/) )	return;
 	baseUrl		= baseUrl.replace(window.location.hash, '');
 	content	= content.replace(/src="/g	, "src=\""	+baseUrl + "./data/boilerplate.orig/")
 	content	= content.replace(/href="/g	, "href=\""	+baseUrl + "./data/boilerplate.orig/")
-	console.log("content", content);
+	//console.log("content", content);
 	// build the data url itself
 	var url = "data:text/html;base64,"+window.btoa(content);
 	// create the iframe for the preview
@@ -141,7 +143,7 @@ if( fileName.match(/.*.gitignore/) )	return;
 	}.bind(this));
 	
 	flow.seq(function(next, err, result){
-		// console.log("all files loaded... generating zip")
+		//console.log("all files loaded... generating zip")
 		//var content	= this._jszip.generate();
 		//location.href	="data:application/zip;base64,"+content;
 		this._downloadEnable();
@@ -190,17 +192,19 @@ Main.prototype._templateProcess	= function(template, data){
 Main.prototype._collectOptions	= function()
 {
 	var form	= jQuery("#boilerplateOptions");
-	var checkbox	= function(name){
-		return jQuery("[name='"+name+"']", form).is(':checked')
-	};
-	var radio	= function(name){
-		return jQuery("[name='"+name+"']:checked", form).val()
-	};
+	var value	= function(name){ return jQuery("[name='"+name+"']", form).val();		};
+	var checkbox	= function(name){ return jQuery("[name='"+name+"']", form).is(':checked');	};
+	var radio	= function(name){ return jQuery("[name='"+name+"']:checked", form).val();	};
 	var options	= {
-		requireWebGL	: checkbox('requireWebGL'),
-		includeStatsjs	: checkbox('includeStatsjs'),
-		objectMaterial	: radio('objectMaterial'),
-		objectGeometry	: radio('objectGeometry')
+		requireWebGL		: checkbox('requireWebGL'),
+		includeStatsjs		: checkbox('includeStatsjs'),
+
+		objectMaterial		: radio('objectMaterial'),
+		objectGeometry		: radio('objectGeometry'),
+
+		nDirectionalLights	: parseInt(value("nDirectionalLights")),
+		nPointLights		: parseInt(value("nPointLights")),
+		ambientLight		: checkbox('ambientLight'),
 	};
 	console.log("data", JSON.stringify(options));
 	return options;
