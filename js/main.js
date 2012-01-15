@@ -200,6 +200,7 @@ Main.prototype._collectOptions	= function()
 		includeStatsjs		: checkbox('includeStatsjs'),
 
 		cameraType		: radio('cameraType'),
+		cameraControl		: radio('cameraControl'),
 
 		objectMaterial		: radio('objectMaterial'),
 		objectGeometry		: radio('objectGeometry'),
@@ -227,8 +228,7 @@ Main.prototype._downloadEnable	= function()
 			return "threejsboilerplate.zip";
 		},
 		data: function(){
-			return "kkk";
-			//return this._jszip.generate();
+			return this._jszip.generate();
 		}.bind(this),
 		onComplete: function(){ 
 			console.log('Your File Has Been Saved!'); 

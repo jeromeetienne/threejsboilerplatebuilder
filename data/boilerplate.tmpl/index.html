@@ -78,7 +78,7 @@
 			scene = new THREE.Scene();
 
 		//? /************************************************************/
-		//? /*		Handle camera					*/
+		//? /*		Handle cameraType				*/
 		//? /************************************************************/
 			// put a camera in the scene
 		//? if(data.cameraType === 'perspective' ){
@@ -91,8 +91,15 @@
 		//? }else console.assert(false, 'cameraType value is invalid');
 			scene.add(camera);
 
+		//? /************************************************************/
+		//? /*		Handle cameraControl				*/
+		//? /************************************************************/
 			// create a camera contol
+		//? if(data.cameraControl === 'dragPan' ){
 			cameraControls	= new THREEx.DragPanControls(camera)
+		//? }else if(data.cameraControl === 'trackball' ){
+			cameraControls	= new THREE.TrackballControls( camera )
+		//? }else console.assert(false, 'cameraControl value is invalid');
 
 			// transparently support window resize
 			THREEx.WindowResize.bind(renderer, camera);

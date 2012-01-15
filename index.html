@@ -51,8 +51,15 @@
 		<!-- ************************************************************ -->
 		<div class="row"><a name="builder"></a>
 			<div class="span8">
-				<h2>Options</h2>
-				<form id="boilerplateOptions">
+				<ul class="tabs">
+					<li class="active"><a href="#generalOptions">General</a></li>
+					<li><a href="#objectOptions">Object</a></li>
+					<li><a href="#lightOptions">Light</a></li>
+					<li><a href="#cameraOptions">Camera</a></li>
+				</ul>
+			<form id="boilerplateOptions">
+			<div class="pill-content">
+				<div class="active" id="generalOptions">
 					<fieldset>						
 						<div class="clearfix">
 							<label>Renderer</label>
@@ -75,6 +82,8 @@
 							</ul></div>
 						</div>
 					</fieldset>
+				</div>
+				<div id="objectOptions">
 					<fieldset>
 						<legend>Object</legend>
 						<div class="clearfix">
@@ -112,7 +121,10 @@
 							</ul></div>
 						</div><!-- /clearfix -->
 
-					</fieldset>
+					</fieldset>					
+				</div>
+				<div id="lightOptions">
+
 					<fieldset>
 						<legend>Lights</legend>
 						<div class="clearfix">
@@ -142,6 +154,8 @@
 							</ul></div>
 						</div>
 					</fieldset>
+				</div>
+				<div id="cameraOptions">
 					<fieldset>
 						<legend>Camera</legend>
 						<div class="clearfix">
@@ -157,44 +171,50 @@
 							</label></li>
 							</ul></div>
 						</div><!-- /clearfix -->
+						<div class="clearfix">
+							<label>Camera Control</label>
+							<div class="input"><ul class="inputs-list">
+							<li><label>
+								<input type="radio" name="cameraControl" value="dragPan"  checked/>
+								<span>Drag Pan</span>
+							</label></li>
+							<li><label>
+								<input type="radio" checked name="cameraControl" value="trackball" />
+								<span>Trackball</span>
+							</label></li>
+							</ul></div>
+						</div><!-- /clearfix -->
 					</fieldset>
-					<div class="section progress">
-						building file
-						<img src="images/busywheel.gif"/>
-					</div>
-					<div class="section pending">
-						waiting to build
-						<img src="images/busywheel.gif"/>
-					</div>
-					<div class="section idle">
-						<input type="submit" class="btn primary" value="Build"/>
-					</div>
-				</form>
-				<div id="preloadStatus">
-					<div class="section progress">
-						preloading file
-						<img src="images/busywheel.gif"/>
-					</div>
-					<div class="section done">
-						preloaded file
-					</div>
 				</div>
-				<div id="downloadStatus">		
-					<div id="downloadify" class="section enable">
-						You must have Flash 10 installed to download this file.D
-					</div>
-					<div class="section disable">
-						no download available now
-					</div>
+			</div>	<!-- pill-content -->
+				<div class="section progress">
+					building file
+					<img src="images/busywheel.gif"/>
 				</div>
+				<div class="section pending">
+					waiting to build
+					<img src="images/busywheel.gif"/>
+				</div>
+				<div class="section idle">
+					<input type="submit" class="btn primary" value="Build"/>
+				</div>				
+			</form>
+
 			</div>
 			<div class="span8">
 				<h2>Preview</h2>
-				<div id="buildPreview">					
+				<div id="buildPreview"></div>
+				<div id="preloadStatus">
+					<div class="section progress">preloading file <img src="images/busywheel.gif"/></div>
+					<div class="section done">preloaded file</div>
+				</div>
+				<div id="downloadStatus">		
+					<div id="downloadify" class="section enable">Flash 10 needed</div>
+					<div class="section disable">no download available now</div>
 				</div>
 			</div>
-		</div>
-		
+		</div> 
+
 		<!-- ************************************************************ -->
 		<!-- *		About Section					* -->
 		<!-- ************************************************************ -->
@@ -237,6 +257,8 @@
 	<script src="vendor/bootstrap/js/bootstrap-twipsy.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap-popover.js"></script>
 	<script>jQuery("[rel='popover']").popover()</script>
+	<script src="vendor/bootstrap/js/bootstrap-tabs.js"></script>
+	<script>jQuery('.tabs').tabs()</script>
 
 
 	<script src="vendor/jszip/jszip.js"></script>
