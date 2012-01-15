@@ -199,6 +199,8 @@ Main.prototype._collectOptions	= function()
 		requireWebGL		: checkbox('requireWebGL'),
 		includeStatsjs		: checkbox('includeStatsjs'),
 
+		cameraType		: radio('cameraType'),
+
 		objectMaterial		: radio('objectMaterial'),
 		objectGeometry		: radio('objectGeometry'),
 
@@ -218,13 +220,15 @@ Main.prototype._downloadEnable	= function()
 {
 	// show section
 	jQuery('#downloadStatus .section').hide().filter('.enable').show();
+
 	// enable downloadify
 	Downloadify.create('downloadify',{
 		filename: function(){
 			return "threejsboilerplate.zip";
 		},
 		data: function(){
-			return this._jszip.generate();
+			return "kkk";
+			//return this._jszip.generate();
 		}.bind(this),
 		onComplete: function(){ 
 			console.log('Your File Has Been Saved!'); 

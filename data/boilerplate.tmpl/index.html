@@ -77,9 +77,18 @@
 			// create a scene
 			scene = new THREE.Scene();
 
+		//? /************************************************************/
+		//? /*		Handle camera					*/
+		//? /************************************************************/
 			// put a camera in the scene
-			camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 10000 );
+		//? if(data.cameraType === 'perspective' ){
+			camera	= new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 10000 );
 			camera.position.set(0, 0, 5);
+		//? }else if(data.cameraType === 'orthographic' ){
+			camera	= new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 1, 10000 );
+			// FIXME this position isnt good for the 
+			camera.position.set(0, 0, 5);
+		//? }else console.assert(false, 'cameraType value is invalid');
 			scene.add(camera);
 
 			// create a camera contol
@@ -136,10 +145,15 @@
 			scene.add( light );
 		//? }
 
+		//? /************************************************************/
+		//? /*		Handle object					*/
+		//? /************************************************************/
 		//? if(data.objectGeometry === 'torus' ){
 			var geometry	= new THREE.TorusGeometry( 1, 0.42 );
 		//? }else if(data.objectGeometry === 'cube' ){
 			var geometry	= new THREE.CubeGeometry( 2, 2, 2 );
+		//? }else if(data.objectGeometry === 'sphere' ){
+			var geometry	= new THREE.SphereGeometry( 1, 16, 8 );
 		//? }else console.assert(false, 'objectGeometry value is invalid');
 		//? if(data.objectMaterial === 'lambert' ){
 			var material	= new THREE.MeshLambertMaterial({ambient: 0x808080, color: Math.random() * 0xffffff});
