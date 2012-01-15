@@ -155,7 +155,7 @@
 		//? /*		Handle object					*/
 		//? /************************************************************/
 		//? if(data.objectGeometry === 'torus' ){
-			var geometry	= new THREE.TorusGeometry( 1, 0.42 );
+			var geometry	= new THREE.TorusGeometry( 1, 0.42, 16, 16 );
 		//? }else if(data.objectGeometry === 'cube' ){
 			var geometry	= new THREE.CubeGeometry( 2, 2, 2 );
 		//? }else if(data.objectGeometry === 'sphere' ){
@@ -168,7 +168,7 @@
 		//? }else if(data.objectMaterial === 'normal' ){
 			var material	= new THREE.MeshNormalMaterial();
 		//? }else console.assert(false, 'objectMaterial value is invalid');
-			var mesh	= new THREE.Mesh( geometry, material );
+			var mesh	= new THREE.Mesh( geometry, material ); 
 			scene.add( mesh );
 		}
 
