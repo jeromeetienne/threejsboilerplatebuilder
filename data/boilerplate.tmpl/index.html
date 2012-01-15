@@ -86,7 +86,6 @@
 			camera.position.set(0, 0, 5);
 		//? }else if(data.cameraType === 'orthographic' ){
 			camera	= new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 1, 10000 );
-			// FIXME this position isnt good for the 
 			camera.position.set(0, 0, 5);
 		//? }else console.assert(false, 'cameraType value is invalid');
 			scene.add(camera);
