@@ -197,6 +197,7 @@ Main.prototype._readOptions	= function()
 	var options	= {
 		requireWebGL		: checkbox('requireWebGL'),
 		includeStatsjs		: checkbox('includeStatsjs'),
+		postProcessing		: checkbox('postProcessing'),
 
 		objectMaterial		: radio('objectMaterial'),
 		objectGeometry		: radio('objectGeometry'),
@@ -222,6 +223,7 @@ Main.prototype._writeOptions	= function()
 
 	checkbox('requireWebGL'		, false);
 	checkbox('includeStatsjs'	, true);
+	checkbox('postProcessing'	, false);
 
 	radio('objectMaterial'		, "lambert");
 	radio('objectGeometry'		, 'torus');
