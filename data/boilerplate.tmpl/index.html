@@ -59,7 +59,7 @@
 					preserveDrawingBuffer	: true	// to allow screenshot
 				});
 		//? if( !data.postProcessing ){
-		//? no idea why setting this color make it bad
+		//? // no idea why setting this color make postprocessing weird
 				renderer.setClearColorHex( 0xBBBBBB, 1 );
 		//? }
 		//? if(data.requireWebGL){
@@ -184,12 +184,14 @@
 		//? /*		Handle PostProcessing				*/
 		//? /************************************************************/
 		//? if( data.postProcessing ){
+			// define the stack of passes for postProcessing
 			composer = new THREE.EffectComposer( renderer );
+			renderer.autoClear = false;
 
 			var renderModel	= new THREE.RenderPass( scene, camera );
 			composer.addPass( renderModel );
 
-			var effectBloom = new THREE.BloomPass( 1.3 );
+			var effectBloom = new THREE.BloomPass( 1.5 );
 			composer.addPass( effectBloom );
 
 			var effectScreen= new THREE.ShaderPass( THREE.ShaderExtras[ "screen" ] );
@@ -221,17 +223,15 @@
 			// update camera controls
 			cameraControls.update();
 
-
 		//? if(data.objectAnimation){
+			// animation of all objects
 			var time = Date.now() * 0.001;
 			for( var i = 0; i < scene.objects.length; i ++ ){
 				scene.objects[ i ].rotation.y = time * ( i % 2 ? 1 : -1 );
 			}
 		//? }
-				
 			// actually render the scene
 		//? if( data.postProcessing ){
-			renderer.autoClear = false;
 			renderer.clear();
 			composer.render();
 		//? }else{			
