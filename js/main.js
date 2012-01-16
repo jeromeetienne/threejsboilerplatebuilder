@@ -4,6 +4,8 @@ var Main	= function()
 	this._jszip		= new JSZip();
 	this._filesContent	= {};
 	this._buildOnPreloaded	= true;	// false;
+	this._buildButton	= false;
+	this._buildOnChange	= true;
 
 	this._preloaded		= false;
 	jQuery('#preloadStatus .section').hide().filter('.progress').show();
@@ -20,8 +22,7 @@ var Main	= function()
 		     	this._buildZip();			
 		}else{
 			this._buildOnPreloaded	= true;
-			jQuery('#boilerplateOptions .section').hide();
-			jQuery('#boilerplateOptions .section.pending').show();
+			this._buildButton && jQuery('#boilerplateOptions .section').hide().filter('.pending').show();
 		}
 		return false;
 	}.bind(this));
@@ -29,7 +30,7 @@ var Main	= function()
 		// disable the download as it is now invalid
 		this._downloadDisable();
 		// rebuild for live update
-		if( this._preloaded )	this._buildZip();			
+		if( this._preloaded && this._buildOnChange )	this._buildZip();			
 	}.bind(this));
 }
 
@@ -79,8 +80,7 @@ if( fileName.match(/.*.gitignore/) )	return;
 Main.prototype._onPreloaded	= function()
 {
 	this._preloaded	= true;
-	jQuery('#preloadStatus .section').hide();
-	jQuery('#preloadStatus .section.done').show();
+	jQuery('#preloadStatus .section').hide().filter('.done').show();
 
 	if( this._buildOnPreloaded ){
 		this._buildOnPreloaded	= false;
@@ -149,9 +149,7 @@ if( fileName.match(/.*.gitignore/) )	return;
 		//var content	= this._jszip.generate();
 		//location.href	="data:application/zip;base64,"+content;
 		this._downloadEnable();
-
-		jQuery('#boilerplateOptions .section').hide();
-		jQuery('#boilerplateOptions .section.idle').show();
+		this._buildButton && jQuery('#boilerplateOptions .section').hide().filter('.idle').show();
 	}.bind(this));
 }
 
@@ -159,8 +157,7 @@ Main.prototype._buildEnable	= function()
 {
 	jQuery('#boilerplateOptions input[type="submit"]').attr('disabled', null);
 
-	jQuery('#boilerplateOptions .section').hide();
-	jQuery('#boilerplateOptions .section.idle').show();
+	this._buildButton && jQuery('#boilerplateOptions .section').hide().filter('.idle').show();
 }
 
 //////////////////////////////////////////////////////////////////////////////////
