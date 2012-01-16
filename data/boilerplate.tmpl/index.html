@@ -195,6 +195,14 @@
 			// update camera controls
 			cameraControls.update();
 
+
+		//? if(data.objectAnimation){
+			var time = Date.now() * 0.001;
+			for( var i = 0; i < scene.objects.length; i ++ ){
+				scene.objects[ i ].rotation.y = time * ( i % 2 ? 1 : -1 );
+			}
+		//? }
+				
 			// actually render the scene
 			renderer.render( scene, camera );
 		}

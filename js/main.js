@@ -200,6 +200,7 @@ Main.prototype._readOptions	= function()
 
 		objectMaterial		: radio('objectMaterial'),
 		objectGeometry		: radio('objectGeometry'),
+		objectAnimation		: checkbox('objectAnimation'),
 
 		nDirectionalLights	: parseInt(value("nDirectionalLights")),
 		nPointLights		: parseInt(value("nPointLights")),
@@ -224,6 +225,7 @@ Main.prototype._writeOptions	= function()
 
 	radio('objectMaterial'		, "lambert");
 	radio('objectGeometry'		, 'torus');
+	checkbox('objectAnimation'	, true);
 	
 	value('nDirectionalLights'	, 2);
 	value('nPointLights'		, 2);
