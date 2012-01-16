@@ -49,193 +49,203 @@
 		<!-- ************************************************************ -->
 		<!-- *		Builder Section					* -->
 		<!-- ************************************************************ -->
-		<div class="row"><a name="builder"></a>
-			<div class="span8">
-				<ul class="tabs">
-					<li class="active"><a href="#generalOptions">General</a></li>
-					<li><a href="#objectOptions">Object</a></li>
-					<li><a href="#lightOptions">Light</a></li>
-					<li><a href="#cameraOptions">Camera</a></li>
-				</ul>
-			<form id="boilerplateOptions">
-			<div class="pill-content">
-				<div class="active" id="generalOptions">
-					<fieldset>						
-						<div class="clearfix">
-							<label>Renderer</label>
-							<div class="input"><ul class="inputs-list">
-								<li><label rel="popover" data-original-title="WebGL is required ?"
-									data-content="pick this one if your project require WebGL">
-									<input type="checkbox" name="requireWebGL">
-									<span>WebGL is required</span>
-								</label></li>
-							</ul></div>
-						</div>
-						<div class="clearfix">
-							<label>Tools</label>
-							<div class="input"><ul class="inputs-list">
-								<li><label rel="popover" data-original-title="include Stats.js ?"
-									data-content="stats.js is a small library to monitor performance.">
-									<input type="checkbox" name="includeStatsjs">
-									<span>Stats.js is included</span>
-								</label></li>
-							</ul></div>
-						</div>
-					</fieldset>
-				</div>
-				<div id="objectOptions">
-					<fieldset>
-						<legend>Object</legend>
-						<div class="clearfix">
-							<label>Object Material</label>
-							<div class="input"><ul class="inputs-list">
-							<li><label>
-								<input type="radio" checked name="objectMaterial" value="lambert" checked/>
-								<span>Lambert</span>
-							</label></li>
-							<li><label>
-								<input type="radio" name="objectMaterial" value="normal" />
-								<span>Normal</span>
-							</label></li>
-							<li><label>
-								<input type="radio" checked name="objectMaterial" value="phong" />
-								<span>Phong</span>
-							</label></li>
-							</ul></div>
-						</div><!-- /clearfix -->
-						<div class="clearfix">
-							<label>Object Geometry</label>
-							<div class="input"><ul class="inputs-list">
-							<li><label>
-								<input type="radio" checked name="objectGeometry" value="torus" checked/>
-								<span>Torus</span>
-							</label></li>
-							<li><label>
-								<input type="radio" checked name="objectGeometry" value="sphere"/>
-								<span>Sphere</span>
-							</label></li>
-							<li><label>
-								<input type="radio" name="objectGeometry" value="cube" />
-								<span>Cube</span>
-							</label></li>
-							</ul></div>
-						</div><!-- /clearfix -->
-
-					</fieldset>					
-				</div>
-				<div id="lightOptions">
-
-					<fieldset>
-						<legend>Lights</legend>
-						<div class="clearfix">
-							<label for="nDirectionalLights">Directional</label>
-							<div class="input"><select name="nDirectionalLights">
-							    <option>0</option>
-							    <option>1</option>
-							    <option>2</option>
-							    <option>3</option>
-							</select></div>
-						</div><!-- /clearfix -->
-						<div class="clearfix">
-							<label for="nPointLights">Points</label>
-							<div class="input"><select name="nPointLights">
-							    <option>0</option>
-							    <option>1</option>
-							    <option>2</option>
-							    <option>3</option>
-							</select></div>
-						</div><!-- /clearfix -->
-						<div class="clearfix">
-							<label>Ambient</label>
-							<div class="input"><ul class="inputs-list">
+		<section id="builder">
+			<div class="page-header">
+				<h1>Build a Three.js Project <small>in 3min</small></h1>
+			</div>
+			<div class="row"><a name="builder"></a>
+				<div class="span8">
+					<ul class="tabs">
+						<li class="active"><a href="#generalOptions">General</a></li>
+						<li><a href="#objectOptions">Object</a></li>
+						<li><a href="#lightOptions">Light</a></li>
+						<li><a href="#cameraOptions">Camera</a></li>
+					</ul>
+				<form id="boilerplateOptions">
+				<div class="pill-content">
+					<div class="active" id="generalOptions">
+						<fieldset>						
+							<div class="clearfix">
+								<label>Renderer</label>
+								<div class="input"><ul class="inputs-list">
+									<li><label rel="popover" data-original-title="WebGL is required ?"
+										data-content="pick this one if your project require WebGL">
+										<input type="checkbox" name="requireWebGL">
+										<span>WebGL is required</span>
+									</label></li>
+								</ul></div>
+							</div>
+							<div class="clearfix">
+								<label>Tools</label>
+								<div class="input"><ul class="inputs-list">
+									<li><label rel="popover" data-original-title="include Stats.js ?"
+										data-content="stats.js is a small library to monitor performance.">
+										<input type="checkbox" name="includeStatsjs">
+										<span>Stats.js is included</span>
+									</label></li>
+								</ul></div>
+							</div>
+						</fieldset>
+					</div>
+					<div id="objectOptions">
+						<fieldset>
+							<legend>Object</legend>
+							<div class="clearfix">
+								<label>Object Material</label>
+								<div class="input"><ul class="inputs-list">
 								<li><label>
-									<input type="checkbox" name="ambientLight">
+									<input type="radio" checked name="objectMaterial" value="lambert" checked/>
+									<span>Lambert</span>
 								</label></li>
-							</ul></div>
-						</div>
-					</fieldset>
+								<li><label>
+									<input type="radio" name="objectMaterial" value="normal" />
+									<span>Normal</span>
+								</label></li>
+								<li><label>
+									<input type="radio" checked name="objectMaterial" value="phong" />
+									<span>Phong</span>
+								</label></li>
+								</ul></div>
+							</div><!-- /clearfix -->
+							<div class="clearfix">
+								<label>Object Geometry</label>
+								<div class="input"><ul class="inputs-list">
+								<li><label>
+									<input type="radio" checked name="objectGeometry" value="torus" checked/>
+									<span>Torus</span>
+								</label></li>
+								<li><label>
+									<input type="radio" checked name="objectGeometry" value="sphere"/>
+									<span>Sphere</span>
+								</label></li>
+								<li><label>
+									<input type="radio" name="objectGeometry" value="cube" />
+									<span>Cube</span>
+								</label></li>
+								</ul></div>
+							</div><!-- /clearfix -->
+	
+						</fieldset>					
+					</div>
+					<div id="lightOptions">
+	
+						<fieldset>
+							<legend>Lights</legend>
+							<div class="clearfix">
+								<label for="nDirectionalLights">Directional</label>
+								<div class="input"><select name="nDirectionalLights">
+								    <option>0</option>
+								    <option>1</option>
+								    <option>2</option>
+								    <option>3</option>
+								</select></div>
+							</div><!-- /clearfix -->
+							<div class="clearfix">
+								<label for="nPointLights">Points</label>
+								<div class="input"><select name="nPointLights">
+								    <option>0</option>
+								    <option>1</option>
+								    <option>2</option>
+								    <option>3</option>
+								</select></div>
+							</div><!-- /clearfix -->
+							<div class="clearfix">
+								<label>Ambient</label>
+								<div class="input"><ul class="inputs-list">
+									<li><label>
+										<input type="checkbox" name="ambientLight">
+									</label></li>
+								</ul></div>
+							</div>
+						</fieldset>
+					</div>
+					<div id="cameraOptions">
+						<fieldset>
+							<legend>Camera</legend>
+							<div class="clearfix">
+								<label>Camera Type</label>
+								<div class="input"><ul class="inputs-list">
+								<li><label>
+									<input type="radio" name="cameraType" value="perspective"  checked/>
+									<span>Perspective</span>
+								</label></li>
+								<li><label>
+									<input type="radio" checked name="cameraType" value="orthographic" />
+									<span>Orthographic</span>
+								</label></li>
+								</ul></div>
+							</div><!-- /clearfix -->
+							<div class="clearfix">
+								<label>Camera Control</label>
+								<div class="input"><ul class="inputs-list">
+								<li><label>
+									<input type="radio" name="cameraControl" value="dragPan"  checked/>
+									<span>Drag Pan</span>
+								</label></li>
+								<li><label>
+									<input type="radio" checked name="cameraControl" value="trackball" />
+									<span>Trackball</span>
+								</label></li>
+								</ul></div>
+							</div><!-- /clearfix -->
+						</fieldset>
+					</div>
+				</div>	<!-- pill-content -->
+					<div class="section progress">
+						building file
+						<img src="images/busywheel.gif"/>
+					</div>
+					<div class="section pending">
+						waiting to build
+						<img src="images/busywheel.gif"/>
+					</div>
+					<div class="section idle">
+						<input type="submit" class="btn primary" value="Build"/>
+					</div>				
+				</form>
+	
 				</div>
-				<div id="cameraOptions">
-					<fieldset>
-						<legend>Camera</legend>
-						<div class="clearfix">
-							<label>Camera Type</label>
-							<div class="input"><ul class="inputs-list">
-							<li><label>
-								<input type="radio" name="cameraType" value="perspective"  checked/>
-								<span>Perspective</span>
-							</label></li>
-							<li><label>
-								<input type="radio" checked name="cameraType" value="orthographic" />
-								<span>Orthographic</span>
-							</label></li>
-							</ul></div>
-						</div><!-- /clearfix -->
-						<div class="clearfix">
-							<label>Camera Control</label>
-							<div class="input"><ul class="inputs-list">
-							<li><label>
-								<input type="radio" name="cameraControl" value="dragPan"  checked/>
-								<span>Drag Pan</span>
-							</label></li>
-							<li><label>
-								<input type="radio" checked name="cameraControl" value="trackball" />
-								<span>Trackball</span>
-							</label></li>
-							</ul></div>
-						</div><!-- /clearfix -->
-					</fieldset>
+				<div class="span8">
+					<h2>Preview</h2>
+					<div id="buildPreview"></div>
+							<span id="preloadStatus">
+								<span class="section progress">Loading files<img src="images/busywheel.gif"/></span>
+								<span class="section done">Files Loaded</span>
+							</span>
+							<span id="downloadStatus" style="float: right">		
+								<span id="downloadify" class="section enable">Flash 10 needed</span>
+								<span class="section disable"></span>
+							</span>
 				</div>
-			</div>	<!-- pill-content -->
-				<div class="section progress">
-					building file
-					<img src="images/busywheel.gif"/>
-				</div>
-				<div class="section pending">
-					waiting to build
-					<img src="images/busywheel.gif"/>
-				</div>
-				<div class="section idle">
-					<input type="submit" class="btn primary" value="Build"/>
-				</div>				
-			</form>
-
 			</div>
-			<div class="span8">
-				<h2>Preview</h2>
-				<div id="buildPreview"></div>
-						<span id="preloadStatus">
-							<span class="section progress">Loading files<img src="images/busywheel.gif"/></span>
-							<span class="section done">Files Loaded</span>
-						</span>
-						<span id="downloadStatus" style="float: right">		
-							<span id="downloadify" class="section enable">Flash 10 needed</span>
-							<span class="section disable"></span>
-						</span>
-			</div>
-		</div> 
+		</section>
 
 		<!-- ************************************************************ -->
 		<!-- *		About Section					* -->
 		<!-- ************************************************************ -->
-		<div class="row"><a name="about"></a>
-			<h1>About</h1>
-			This is a builder for a <a href="http://github.com/jeromeetienne/threejsboilerplate">boilerplate for three.js</a>.
-			You can find more <a href="http://learningthreejs.com/blog/2011/12/20/boilerplate-for-three-js/">doc here</a>.
-			It has been written by <a href="http://jetienne.com">Jerome Etienne</a>.
+		<section id="about">
+			<div class="page-header">
+				<h1>About</h1>
+			</div>
 
-			It uses
-			<a href="http://jszip.stuartk.co.uk/">jszip</a>
-			, a library which reate .zip files with Javascript.
-			Its creates the boilerplater.zip that you download.
-			It uses
-			<a href="https://github.com/dcneiner/Downloadify">downloadify</a>
-			, a small library to create and download files without server.
-			Thus i don't have to run servers, and this makes me happy :)
-			Last but not least, it uses
-			<a href="https://github.com/mrdoob/three.js">three.js</a>,
-			the javaScript 3d engine that we all love :)
-		</div>
+			<div class="row">
+				This is a builder for a <a href="http://github.com/jeromeetienne/threejsboilerplate">boilerplate for three.js</a>.
+				You can find more <a href="http://learningthreejs.com/blog/2011/12/20/boilerplate-for-three-js/">doc here</a>.
+				It has been written by <a href="http://jetienne.com">Jerome Etienne</a>.
+	
+				It uses
+				<a href="http://jszip.stuartk.co.uk/">jszip</a>
+				, a library which reate .zip files with Javascript.
+				Its creates the boilerplater.zip that you download.
+				It uses
+				<a href="https://github.com/dcneiner/Downloadify">downloadify</a>
+				, a small library to create and download files without server.
+				Thus i don't have to run servers, and this makes me happy :)
+				Last but not least, it uses
+				<a href="https://github.com/mrdoob/three.js">three.js</a>,
+				the javaScript 3d engine that we all love :)
+			</div>
+		</section>		
 	</div> <!-- /container -->
 
 	<footer class="footer">
