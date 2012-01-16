@@ -146,17 +146,20 @@
 		//? }
 		//? if(data.nPointLights > 0 ){
 			var light	= new THREE.PointLight( Math.random() * 0xffffff );
-			light.position.set( Math.random(), Math.random(), Math.random() );
+			light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 )
+						.normalize().multiplyScalar(Math.random()*3);
 			scene.add( light );
 		//? }
 		//? if(data.nPointLights > 1 ){
 			var light	= new THREE.PointLight( Math.random() * 0xffffff );
-			light.position.set( Math.random(), Math.random(), Math.random() );
+			light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 )
+						.normalize().multiplyScalar(Math.random()*3);
 			scene.add( light );
 		//? }
 		//? if(data.nPointLights > 2 ){
 			var light	= new THREE.PointLight( Math.random() * 0xffffff );
-			light.position.set( Math.random(), Math.random(), Math.random() );
+			light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 )
+						.normalize().multiplyScalar(Math.random()*3);
 			scene.add( light );
 		//? }
 
