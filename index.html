@@ -205,12 +205,12 @@
 				<h2>Preview</h2>
 				<div id="buildPreview"></div>
 				<div id="preloadStatus">
-					<div class="section progress">preloading file <img src="images/busywheel.gif"/></div>
-					<div class="section done">preloaded file</div>
+					<div class="section progress">Loading files<img src="images/busywheel.gif"/></div>
+					<div class="section done">Files Loaded</div>
 				</div>
 				<div id="downloadStatus">		
 					<div id="downloadify" class="section enable">Flash 10 needed</div>
-					<div class="section disable">no download available now</div>
+					<div class="section disable"></div>
 				</div>
 			</div>
 		</div> 
@@ -272,6 +272,6 @@
 	<script src="vendor/downloadify/js/downloadify.min.js"></script>
 
 	<script src="js/main.js"></script>
-	<script>var main = new Main()</script>
+	<script>jQuery(function(){var main = new Main();})</script>
 </body>
 </html>

@@ -8,6 +8,8 @@ var Main	= function()
 	this._preloaded		= false;
 	jQuery('#preloadStatus .section').hide().filter('.progress').show();
 
+	this._writeOptions();
+
 	this._preloadStart();
 
 	this._buildEnable();
@@ -106,7 +108,7 @@ if( fileName.match(/.*.gitignore/) )	return;
 			
 			var hasTmpl	= tmplFileList.indexOf(fileName) !== -1 ? true : false;
 			if( hasTmpl ){
-				var tmplOptions	= this._collectOptions();
+				var tmplOptions	= this._readOptions();
 				content		= this._templateProcess(content, tmplOptions);
 				console.log("content", fileName, content);
 
@@ -189,7 +191,7 @@ Main.prototype._templateProcess	= function(template, data){
 //										//
 //////////////////////////////////////////////////////////////////////////////////
 
-Main.prototype._collectOptions	= function()
+Main.prototype._readOptions	= function()
 {
 	var form	= jQuery("#boilerplateOptions");
 	var value	= function(name){ return jQuery("[name='"+name+"']", form).val();		};
@@ -199,18 +201,39 @@ Main.prototype._collectOptions	= function()
 		requireWebGL		: checkbox('requireWebGL'),
 		includeStatsjs		: checkbox('includeStatsjs'),
 
-		cameraType		: radio('cameraType'),
-		cameraControl		: radio('cameraControl'),
-
 		objectMaterial		: radio('objectMaterial'),
 		objectGeometry		: radio('objectGeometry'),
 
 		nDirectionalLights	: parseInt(value("nDirectionalLights")),
 		nPointLights		: parseInt(value("nPointLights")),
 		ambientLight		: checkbox('ambientLight'),
+
+		cameraType		: radio('cameraType'),
+		cameraControl		: radio('cameraControl'),
 	};
 	console.log("data", JSON.stringify(options));
 	return options;
+}
+
+Main.prototype._writeOptions	= function()
+{
+	var form	= jQuery("#boilerplateOptions");
+	var value	= function(name, val){ return jQuery("[name='"+name+"']", form).val(val);		};
+	var checkbox	= function(name, val){ return jQuery("[name='"+name+"']", form).prop('checked', val);	};
+	var radio	= function(name, val){ return jQuery("[name='"+name+"'][value='"+val+"']", form).prop('checked', true);	};
+
+	checkbox('requireWebGL'		, false);
+	checkbox('includeStatsjs'	, true);
+
+	radio('objectMaterial'		, "lambert");
+	radio('objectGeometry'		, 'torus');
+	
+	value('nDirectionalLights'	, 2);
+	value('nPointLights'		, 2);
+	checkbox('ambientLight'		, true);
+	
+	radio('cameraControl'		, 'dragPan');
+	radio('cameraType'		, 'perspective');
 }
 
 //////////////////////////////////////////////////////////////////////////////////
