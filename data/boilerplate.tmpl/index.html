@@ -47,7 +47,6 @@
 		var stats, scene, renderer, composer;
 		var camera, cameraControl;
 
-
 		if( !init() )	animate();
 
 		// init the scene
@@ -94,7 +93,7 @@
 			camera	= new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 10000 );
 			camera.position.set(0, 0, 5);
 		//? }else if(data.cameraType === 'orthographic' ){
-			camera	= new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 1, 10000 );
+			camera	= new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, -10000, 10000 );
 			camera.position.set(0, 0, 5);
 		//? }else console.assert(false, 'cameraType value is invalid');
 			scene.add(camera);
@@ -147,19 +146,19 @@
 		//? if(data.nPointLights > 0 ){
 			var light	= new THREE.PointLight( Math.random() * 0xffffff );
 			light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 )
-						.normalize().multiplyScalar(Math.random()*3);
+						.normalize().multiplyScalar(1.2);
 			scene.add( light );
 		//? }
 		//? if(data.nPointLights > 1 ){
 			var light	= new THREE.PointLight( Math.random() * 0xffffff );
 			light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 )
-						.normalize().multiplyScalar(Math.random()*3);
+						.normalize().multiplyScalar(1.2);
 			scene.add( light );
 		//? }
 		//? if(data.nPointLights > 2 ){
 			var light	= new THREE.PointLight( Math.random() * 0xffffff );
 			light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 )
-						.normalize().multiplyScalar(Math.random()*3);
+						.normalize().multiplyScalar(1.2);
 			scene.add( light );
 		//? }
 
@@ -181,6 +180,9 @@
 			var material	= new THREE.MeshNormalMaterial();
 		//? }else console.assert(false, 'objectMaterial value is invalid');
 			var mesh	= new THREE.Mesh( geometry, material ); 
+		//? if(data.cameraType === 'orthographic' ){
+			mesh.scale.multiplyScalar(100)
+		//? }
 			scene.add( mesh );
 
 		//? /************************************************************/
@@ -222,17 +224,35 @@
 
 		// render the scene
 		function render() {
+			// variable which is increase by Math.PI every seconds - usefull for animation
+			var PIseconds	= Date.now() * Math.PI;
 
 			// update camera controls
 			cameraControls.update();
 
 		//? if(data.objectAnimation){
 			// animation of all objects
-			var time = Date.now() * 0.001;
 			for( var i = 0; i < scene.objects.length; i ++ ){
-				scene.objects[ i ].rotation.y = time * ( i % 2 ? 1 : -1 );
+				scene.objects[ i ].rotation.y = PIseconds*0.0003 * ( i % 2 ? 1 : -1 );
 			}
 		//? }
+		//? if(data.directionalLightsAnim){
+			// animate DirectionalLight
+			scene.lights.forEach(function(light, idx){
+				if( light instanceof THREE.DirectionalLight === false )	return;
+				var ang	= 0.0005 * PIseconds * (idx % 2 ? 1 : -1);
+				light.position.set(Math.cos(ang), Math.sin(ang), Math.cos(ang*2)).normalize();							
+			});
+		//? }
+		//? if(data.pointLightsAnim){
+			// animate PointLights
+			scene.lights.forEach(function(light, idx){
+				if( light instanceof THREE.PointLight === false )	return;
+				var angle	= 0.0005 * PIseconds * (idx % 2 ? 1 : -1) + idx * Math.PI/3;
+				light.position.set(Math.cos(angle)*3, Math.sin(angle*3)*2, Math.cos(angle*2)).normalize().multiplyScalar(2);
+			});
+		//? }
+
 			// actually render the scene
 		//? if( data.postProcessing ){
 			renderer.clear();

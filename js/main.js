@@ -204,7 +204,9 @@ Main.prototype._readOptions	= function()
 		objectAnimation		: checkbox('objectAnimation'),
 
 		nDirectionalLights	: parseInt(value("nDirectionalLights")),
+		directionalLightsAnim	: checkbox("directionalLightsAnim"),
 		nPointLights		: parseInt(value("nPointLights")),
+		pointLightsAnim		: checkbox("pointLightsAnim"),
 		ambientLight		: checkbox('ambientLight'),
 
 		cameraType		: radio('cameraType'),
@@ -230,7 +232,9 @@ Main.prototype._writeOptions	= function()
 	checkbox('objectAnimation'	, true);
 	
 	value('nDirectionalLights'	, 2);
+	checkbox('directionalLightsAnim', true);
 	value('nPointLights'		, 2);
+	checkbox('pointLightsAnim'	, true);
 	checkbox('ambientLight'		, true);
 	
 	radio('cameraControl'		, 'dragPan');
