@@ -13,6 +13,36 @@ deploy: build
 build:	buildOrigFileList buildTmplFileList 
 clean:	cleanOrigFileList cleanTmplFileList
 
+#################################################################################
+#		Boilerplate update						#
+#################################################################################
+
+boilerplateOrigBackup:
+	cd data && mv boilerplate.orig boilerplate.orig.old.`date "+%Y%m%d%H%M%S"`
+
+boilerplateOrigRemove:
+	cd data && rm -fr boilerplate.orig
+
+boilerplateOrigUpdate:
+	curl -sL -o /tmp/3jsbp.zip https://github.com/jeromeetienne/threejsboilerplate/zipball/master	\
+		&& cd data									\
+		&& unzip -d boilerplate.orig /tmp/3jsbp.zip					\
+		&& mv boilerplate.orig/jeromeetienne-threejsboilerplate-*/* boilerplate.orig	\
+		&& rmdir boilerplate.orig/jeromeetienne-threejsboilerplate-*			\
+		&& rm /tmp/3jsbp.zip
+	
+boilerplateFeaturedBuild:
+	cd data && mv -f boilerplate.orig boilerplate			\
+		&& rm -f featured/threejsboilerplate.zip		\
+		&& zip -r featured/threejsboilerplate.zip boilerplate	\
+		&& mv boilerplate boilerplate.orig
+
+boilerplateUpdate: boilerplateOrigBackup boilerplateOrigUpdate boilerplateFeaturedBuild
+
+#################################################################################
+#		FileList							#
+#################################################################################
+
 buildOrigFileList:
 	echo "var origFileList = ["	> data/origFileList.js
 	(cd data/boilerplate.orig/ && find . -type f | awk '{print "\t\""$$1"\","}' | tee -a ../../data/origFileList.js)
