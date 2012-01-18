@@ -102,7 +102,7 @@ Main.prototype._buildZip	= function()
 			if( hasTmpl ){
 				var tmplOptions	= this._readOptions();
 				content		= this._templateProcess(content, tmplOptions);
-				console.log("content", fileName, content);
+				//console.log("content", fileName, content);
 				this._previewCtor(content);
 			}
 			
@@ -216,7 +216,7 @@ Main.prototype._readOptions	= function()
 		cameraType		: radio('cameraType'),
 		cameraControl		: radio('cameraControl'),
 	};
-	console.log("data", JSON.stringify(options));
+	//console.log("data", JSON.stringify(options));
 	return options;
 }
 

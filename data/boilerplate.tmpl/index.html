@@ -235,7 +235,8 @@
 		//? if(data.objectAnimation){
 			// animation of all objects
 			for( var i = 0; i < scene.objects.length; i ++ ){
-				scene.objects[ i ].rotation.y = PIseconds*0.0003 * ( i % 2 ? 1 : -1 );
+				scene.objects[ i ].rotation.y = PIseconds*0.0003 * (i % 2 ? 1 : -1);
+				scene.objects[ i ].rotation.x = PIseconds*0.0002 * (i % 2 ? 1 : -1);
 			}
 		//? }
 		//? if(data.directionalLightsAnim){
