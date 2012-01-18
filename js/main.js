@@ -111,29 +111,7 @@ if( fileName.match(/.*.gitignore/) )	return;
 				var tmplOptions	= this._readOptions();
 				content		= this._templateProcess(content, tmplOptions);
 				console.log("content", fileName, content);
-
-// FIXME write the preview cleanly
-// handle preview  
-(function(content){
-	var baseUrl	= window.location.href;
-	// remove hash part if any
-	baseUrl		= baseUrl.replace(window.location.hash, '');
-	content	= content.replace(/src="/g	, "src=\""	+baseUrl + "./data/boilerplate.orig/")
-	content	= content.replace(/href="/g	, "href=\""	+baseUrl + "./data/boilerplate.orig/")
-	//console.log("content", content);
-	// build the data url itself
-	var url = "data:text/html;base64,"+window.btoa(content);
-	// create the iframe for the preview
-	jQuery('#buildPreview').empty();
-	jQuery("<iframe>").attr({
-		allowfullscreen	: true,
-		webkitallowfullscreen	: true,
-		mozallowfullscreen	: true,
-		src	: url,
-		width	: "100%",
-		height	: "320px"
-	}).appendTo('#buildPreview');	
-}(content));
+				this._previewCtor(content);
 			}
 			
 			var dstName	= dstDirname + fileName;
@@ -164,6 +142,36 @@ Main.prototype._buildEnable	= function()
 //										//
 //////////////////////////////////////////////////////////////////////////////////
 
+Main.prototype._previewCtor	= function(content)
+{
+	var baseUrl	= window.location.href;
+	// remove hash part if any
+	baseUrl		= baseUrl.replace(window.location.hash, '');
+	content	= content.replace(/src="/g	, "src=\""	+baseUrl + "./data/boilerplate.orig/")
+	content	= content.replace(/href="/g	, "href=\""	+baseUrl + "./data/boilerplate.orig/")
+	//console.log("content", content);
+	// build the data url itself
+	var url = "data:text/html;base64,"+window.btoa(content);
+	// create the iframe for the preview
+	jQuery('#buildPreview').empty();
+	jQuery("<iframe>").attr({
+		allowfullscreen	: true,
+		webkitallowfullscreen	: true,
+		mozallowfullscreen	: true,
+		src	: url,
+		width	: "100%",
+		height	: "320px"
+	}).appendTo('#buildPreview');
+}
+
+Main.prototype._previewDtor	= function()
+{
+	jQuery('#buildPreview').empty();
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+//										//
+//////////////////////////////////////////////////////////////////////////////////
 Main.prototype._templateProcess	= function(template, data){
 	data		= data	|| {};
 	var lines	= template.split(/\n/);
