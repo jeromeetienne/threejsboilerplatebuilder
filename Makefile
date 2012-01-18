@@ -31,9 +31,6 @@ boilerplateOrigUpdate:
 		&& find boilerplate.orig -name ".gitignore" -exec bash -c 'mv $$0 $${0/\.gitignore/gitignore}' {} \;	\
 		&& rmdir boilerplate.orig/jeromeetienne-threejsboilerplate-*			\
 		&& rm /tmp/3jsbp.zip
-
-#		&& find boilerplate.orig -name ".gitignore" -exec bash -c 'mv -v .gitignore gitignore' {} \;	\
-
 	
 boilerplateFeaturedBuild:
 	cd data && mv -f boilerplate.orig boilerplate			\
