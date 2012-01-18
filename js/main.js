@@ -106,10 +106,6 @@ Main.prototype._buildZip	= function()
 				this._previewCtor(content);
 			}
 			
-			// workaround gh-pages limitation on .gitignore
-			// NOTE: gh-pages doesn't seem to accept .gitignore file. reason unknown
-			fileName	= fileName.replace(/^forceghpages/, '');
-			
 			var dstName	= dstDirname + fileName;
 			var dirName	= dstName.substr(0, dstName.lastIndexOf('/'));
 			this._jszip.folder(dirName);

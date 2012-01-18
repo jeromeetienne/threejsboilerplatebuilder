@@ -1,6 +1,6 @@
 var origFileList = [
 	"./css/main.css",
-	"./images/.gitignore",
+	"./images/gitignore",
 	"./index.html",
 	"./js/gitignore",
 	"./Makefile",
