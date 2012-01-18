@@ -1,8 +1,8 @@
 var origFileList = [
 	"./css/main.css",
-	"./images/.gitignore.forceghpages",
+	"./images/.gitignore",
 	"./index.html",
-	"./js/.gitignore.forceghpages",
+	"./js/gitignore",
 	"./Makefile",
 	"./MIT-LICENSE.txt",
 	"./README.md",
