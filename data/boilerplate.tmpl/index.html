@@ -93,7 +93,9 @@
 			camera	= new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 10000 );
 			camera.position.set(0, 0, 5);
 		//? }else if(data.cameraType === 'orthographic' ){
-			camera	= new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, -10000, 10000 );
+			var cameraH	= 3;
+			var cameraW	= cameraH / window.innerHeight * window.innerWidth;
+			camera	= new THREE.OrthographicCamera( -cameraW/2, +cameraW/2, cameraH/2, -cameraH/2, -10000, 10000 );
 			camera.position.set(0, 0, 5);
 		//? }else console.assert(false, 'cameraType value is invalid');
 			scene.add(camera);
@@ -179,12 +181,6 @@
 			var material	= new THREE.MeshNormalMaterial();
 		//? }else console.assert(false, 'objectMaterial value is invalid');
 			var mesh	= new THREE.Mesh( geometry, material ); 
-		//? if(data.cameraType === 'orthographic' ){
-			//? // TODO this modifying the scale when orthographic is not scalable...
-			//? // you will modify all the scale/position when you change camera ??? 
-			//? // zoom the camera position instead 
-			mesh.scale.multiplyScalar(100);
-		//? }
 			scene.add( mesh );
 
 		//? /************************************************************/
