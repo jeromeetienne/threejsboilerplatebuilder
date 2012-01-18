@@ -120,7 +120,6 @@
 
 			// here you add your objects
 			// - you will most likely replace this part by your own
-
 		//? /************************************************************/
 		//? /*		Handle light					*/
 		//? /************************************************************/
@@ -181,7 +180,10 @@
 		//? }else console.assert(false, 'objectMaterial value is invalid');
 			var mesh	= new THREE.Mesh( geometry, material ); 
 		//? if(data.cameraType === 'orthographic' ){
-			mesh.scale.multiplyScalar(100)
+			//? // TODO this modifying the scale when orthographic is not scalable...
+			//? // you will modify all the scale/position when you change camera ??? 
+			//? // zoom the camera position instead 
+			mesh.scale.multiplyScalar(100);
 		//? }
 			scene.add( mesh );
 

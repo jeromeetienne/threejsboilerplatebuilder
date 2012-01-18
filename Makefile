@@ -29,6 +29,7 @@ boilerplateOrigUpdate:
 		&& unzip -d boilerplate.orig /tmp/3jsbp.zip					\
 		&& mv boilerplate.orig/jeromeetienne-threejsboilerplate-*/* boilerplate.orig	\
 		&& rmdir boilerplate.orig/jeromeetienne-threejsboilerplate-*			\
+		&& find boilerplate.orig -name ".gitignore" -exec bash -c 'mv -v $$0 $$0.forceghpages' {} \;	\
 		&& rm /tmp/3jsbp.zip
 	
 boilerplateFeaturedBuild:

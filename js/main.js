@@ -48,18 +48,14 @@ Main.prototype._preloadStart	= function()
 	var dstDirname	= "boilerplate/"
 
 	origFileList.forEach(function(fileName){
-
-// FIXME this seems to be a github workaround.. not sure at all - to retest
-if( fileName.match(/.*.gitignore/) )	return;
-
-		flow.seq(function(next, err, result){
+		flow.par(function(next, err, result){
 			var hasTmpl	= tmplFileList.indexOf(fileName) !== -1 ? true : false;
 			var baseUrl	= "data/boilerplate."+ (hasTmpl ? "tmpl/" : "orig/");
 			var fileUrl	= baseUrl+fileName;
 			//console.log("start loading", fileUrl);
 			jQuery.ajax({
 				url	: fileUrl,
-				dataType: "text" 
+				dataType: "text"
 			}).error(function(jqXHR, status){
 				console.assert(false, "ERROR loading " + fileName)
 			}.bind(this)).success(function(content){
@@ -98,11 +94,7 @@ Main.prototype._buildZip	= function()
 	var dstDirname	= "boilerplate/"
 	
 	origFileList.forEach(function(fileName){
-
-// FIXME this seems to be a github workaround.. not sure at all - to retest
-if( fileName.match(/.*.gitignore/) )	return;
-
-		flow.par(function(next, err, result){
+		flow.seq(function(next, err, result){
 			var content	= this._filesContent[fileName];
 			//console.log("processing", fileName)
 			
@@ -113,6 +105,10 @@ if( fileName.match(/.*.gitignore/) )	return;
 				console.log("content", fileName, content);
 				this._previewCtor(content);
 			}
+			
+			// workaround gh-pages limitation on .gitignore
+			// NOTE: gh-pages doesn't seem to accept .gitignore file. reason unknown
+			fileName	= fileName.replace(/.forceghpages$/, '');
 			
 			var dstName	= dstDirname + fileName;
 			var dirName	= dstName.substr(0, dstName.lastIndexOf('/'));
