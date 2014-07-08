@@ -141,7 +141,7 @@ Main.prototype._previewCtor	= function(content)
 	baseUrl		= baseUrl.replace(window.location.hash, '');
 	content	= content.replace(/src="/g	, "src=\""	+baseUrl + "./data/boilerplate.orig/")
 	content	= content.replace(/href="/g	, "href=\""	+baseUrl + "./data/boilerplate.orig/")
-	//console.log("content", content);
+	console.log("content", content);
 	// build the data url itself
 	var url = "data:text/html;base64,"+window.btoa(content);
 	// create the iframe for the preview
@@ -197,7 +197,6 @@ Main.prototype._readOptions	= function()
 	var options	= {
 		requireWebGL		: checkbox('requireWebGL'),
 		includeStatsjs		: checkbox('includeStatsjs'),
-		postProcessing		: checkbox('postProcessing'),
 
 		objectMaterial		: radio('objectMaterial'),
 		objectGeometry		: radio('objectGeometry'),
@@ -225,9 +224,8 @@ Main.prototype._writeOptions	= function()
 
 	checkbox('requireWebGL'		, false);
 	checkbox('includeStatsjs'	, true);
-	checkbox('postProcessing'	, false);
 
-	radio('objectMaterial'		, "lambert");
+	radio('objectMaterial'		, "phong");
 	radio('objectGeometry'		, 'torus');
 	checkbox('objectAnimation'	, true);
 	

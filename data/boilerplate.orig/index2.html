@@ -6,19 +6,17 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		
 			
-		<script src="vendor/three.js/Three.js"></script>
-		<script src="vendor/three.js/Detector.js"></script>
-	//? if(data.includeStatsjs){
+		<script src="http://127.0.0.1:8000/./data/boilerplate.orig/vendor/three.js/Three.js"></script>
+		<script src="http://127.0.0.1:8000/./data/boilerplate.orig/vendor/three.js/Detector.js"></script>
 		<!-- https://github.com/mrdoob/stats.js -->
-		<script src="vendor/three.js/Stats.js"></script>
-	//? }
+		<script src="http://127.0.0.1:8000/./data/boilerplate.orig/vendor/three.js/Stats.js"></script>
 
-		<script src="vendor/threex/THREEx.screenshot.js"></script>
-		<script src="vendor/threex/THREEx.FullScreen.js"></script>
-		<script src="vendor/threex/THREEx.WindowResize.js"></script>
-		<script src="vendor/threex.dragpancontrols.js"></script>
+		<script src="http://127.0.0.1:8000/./data/boilerplate.orig/vendor/threex/THREEx.screenshot.js"></script>
+		<script src="http://127.0.0.1:8000/./data/boilerplate.orig/vendor/threex/THREEx.FullScreen.js"></script>
+		<script src="http://127.0.0.1:8000/./data/boilerplate.orig/vendor/threex/THREEx.WindowResize.js"></script>
+		<script src="http://127.0.0.1:8000/./data/boilerplate.orig/vendor/threex.dragpancontrols.js"></script>
 
-		<link  href="css/main.css" rel="stylesheet"/>
+		<link  href="http://127.0.0.1:8000/./data/boilerplate.orig/css/main.css" rel="stylesheet"/>
 	</head>
 <body>
 	<!-- three.js container -->
@@ -26,9 +24,9 @@
 	<!-- info on screen display -->
 	<div id="info">
 		<div class="top">
-			<a href="http://learningthreejs.com/blog/2011/12/20/boilerplate-for-three-js/" target="_blank">LearningThree.js</a>
+			<a href="http://127.0.0.1:8000/./data/boilerplate.orig/http://learningthreejs.com/blog/2011/12/20/boilerplate-for-three-js/" target="_blank">LearningThree.js</a>
 			boiler plate for
-			<a href="https://github.com/mrdoob/three.js/" target="_blank">three.js</a>
+			<a href="http://127.0.0.1:8000/./data/boilerplate.orig/https://github.com/mrdoob/three.js/" target="_blank">three.js</a>
 		</div>
 		<div class="bottom" id="inlineDoc" >
 			- <i>p</i> for screenshot
@@ -49,55 +47,28 @@
 					antialias		: true,	// to get smoother output
 					preserveDrawingBuffer	: true	// to allow screenshot
 				});
-				renderer.setClearColor( 0xbbbbbb );
-		//? if(data.requireWebGL){
-			}else{
-				Detector.addGetWebGLMessage();
-				return true;
-			}
-		//? }else{
 			}else{
 				renderer	= new THREE.CanvasRenderer();
 			}
-		//? }
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.getElementById('container').appendChild(renderer.domElement);
 
-		//? if(data.includeStatsjs){
 			// add Stats.js - https://github.com/mrdoob/stats.js
 			stats = new Stats();
 			stats.domElement.style.position	= 'absolute';
 			stats.domElement.style.bottom	= '0px';
 			document.body.appendChild( stats.domElement );
-		//? }
 
 			// create a scene
 			scene = new THREE.Scene();
 
-		//? /************************************************************/
-		//? /*		Handle cameraType				*/
-		//? /************************************************************/
 			// put a camera in the scene
-		//? if(data.cameraType === 'perspective' ){
 			camera	= new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 10000 );
 			camera.position.set(0, 0, 5);
-		//? }else if(data.cameraType === 'orthographic' ){
-			var cameraH	= 3;
-			var cameraW	= cameraH / window.innerHeight * window.innerWidth;
-			camera	= new THREE.OrthographicCamera( -cameraW/2, +cameraW/2, cameraH/2, -cameraH/2, -10000, 10000 );
-			camera.position.set(0, 0, 5);
-		//? }else console.assert(false, 'cameraType value is invalid');
 			scene.add(camera);
 
-		//? /************************************************************/
-		//? /*		Handle cameraControl				*/
-		//? /************************************************************/
 			// create a camera contol
-		//? if(data.cameraControl === 'dragPan' ){
 			cameraControls	= new THREEx.DragPanControls(camera)
-		//? }else if(data.cameraControl === 'trackball' ){
-			cameraControls	= new THREE.TrackballControls( camera )
-		//? }else console.assert(false, 'cameraControl value is invalid');
 
 			// transparently support window resize
 			THREEx.WindowResize.bind(renderer, camera);
@@ -111,66 +82,41 @@
 
 			// here you add your objects
 			// - you will most likely replace this part by your own
-		//? /************************************************************/
-		//? /*		Handle light					*/
-		//? /************************************************************/
-		//? if(data.ambientLight ){
 			var light	= new THREE.AmbientLight( Math.random() * 0xffffff );
 			scene.add( light );
-		//? }
-		//? if(data.nDirectionalLights > 0 ){
 			var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
 			light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
 			scene.add( light );
-		//? }
-		//? if(data.nDirectionalLights > 1 ){
 			var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
 			light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
 			scene.add( light );
-		//? }
-		//? if(data.nDirectionalLights > 2 ){
-			var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
-			light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
-			scene.add( light );
-		//? }
-		//? if(data.nPointLights > 0 ){
 			var light	= new THREE.PointLight( Math.random() * 0xffffff );
 			light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 )
 						.normalize().multiplyScalar(1.2);
 			scene.add( light );
-		//? }
-		//? if(data.nPointLights > 1 ){
 			var light	= new THREE.PointLight( Math.random() * 0xffffff );
 			light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 )
 						.normalize().multiplyScalar(1.2);
 			scene.add( light );
-		//? }
-		//? if(data.nPointLights > 2 ){
-			var light	= new THREE.PointLight( Math.random() * 0xffffff );
-			light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 )
-						.normalize().multiplyScalar(1.2);
-			scene.add( light );
-		//? }
 
-		//? /************************************************************/
-		//? /*		Handle object					*/
-		//? /************************************************************/
-		//? if(data.objectGeometry === 'torus' ){
 			var geometry	= new THREE.TorusGeometry( 1, 0.42, 16, 16 );
-		//? }else if(data.objectGeometry === 'cube' ){
-			var geometry	= new THREE.CubeGeometry( 2, 2, 2 );
-		//? }else if(data.objectGeometry === 'sphere' ){
-			var geometry	= new THREE.SphereGeometry( 1, 16, 8 );
-		//? }else console.assert(false, 'objectGeometry value is invalid');
-		//? if(data.objectMaterial === 'lambert' ){
 			var material	= new THREE.MeshLambertMaterial({ambient: 0x808080, color: Math.random() * 0xffffff});
-		//? }else if(data.objectMaterial === 'phong' ){
-			var material	= new THREE.MeshPhongMaterial({ambient: 0x808080, color: Math.random() * 0xffffff});
-		//? }else if(data.objectMaterial === 'normal' ){
-			var material	= new THREE.MeshNormalMaterial();
-		//? }else console.assert(false, 'objectMaterial value is invalid');
 			var mesh	= new THREE.Mesh( geometry, material ); 
 			scene.add( mesh );
+
+			// define the stack of passes for postProcessing
+			composer = new THREE.EffectComposer( renderer );
+			renderer.autoClear = false;
+
+			var renderModel	= new THREE.RenderPass( scene, camera );
+			composer.addPass( renderModel );
+
+			var effectBloom = new THREE.BloomPass( 1.5 );
+			composer.addPass( effectBloom );
+
+			var effectScreen= new THREE.ShaderPass( THREE.ShaderExtras[ "screen" ] );
+			effectScreen.renderToScreen = true;
+			composer.addPass( effectScreen );
 		}
 
 		// animation loop
@@ -184,10 +130,8 @@
 			// do the render
 			render();
 
-		//? if(data.includeStatsjs){
 			// update stats
 			stats.update();
-		//? }
 		}
 
 		// render the scene
@@ -198,33 +142,28 @@
 			// update camera controls
 			cameraControls.update();
 
-		//? if(data.objectAnimation){
 			// animation of all objects
 			scene.traverse(function(object3d, i){
 				if( object3d instanceof THREE.Mesh === false )	return
 				object3d.rotation.y = PIseconds*0.0003 * (i % 2 ? 1 : -1);
 				object3d.rotation.x = PIseconds*0.0002 * (i % 2 ? 1 : -1);
 			})
-		//? }
-		//? if(data.directionalLightsAnim){
 			// animate DirectionalLight
 			scene.traverse(function(object3d, idx){
 				if( object3d instanceof THREE.DirectionalLight === false )	return
 				var ang	= 0.0005 * PIseconds * (idx % 2 ? 1 : -1);
 				object3d.position.set(Math.cos(ang), Math.sin(ang), Math.cos(ang*2)).normalize();
 			})
-		//? }
-		//? if(data.pointLightsAnim){
 			// animate PointLights
 			scene.traverse(function(object3d, idx){
 				if( object3d instanceof THREE.PointLight === false )	return
 				var angle	= 0.0005 * PIseconds * (idx % 2 ? 1 : -1) + idx * Math.PI/3;
 				object3d.position.set(Math.cos(angle)*3, Math.sin(angle*3)*2, Math.cos(angle*2)).normalize().multiplyScalar(2);
 			})
-		//? }
 
 			// actually render the scene
-			renderer.render( scene, camera );
+			// renderer.clear();
+			composer.render();
 		}
 	</script>
 </body>
