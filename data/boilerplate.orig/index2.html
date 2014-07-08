@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>learningthree.js boiler plate for three.js</title>
@@ -16,7 +16,7 @@
 		<script src="http://127.0.0.1:8000/./data/boilerplate.orig/vendor/threex/THREEx.WindowResize.js"></script>
 		<script src="http://127.0.0.1:8000/./data/boilerplate.orig/vendor/threex.dragpancontrols.js"></script>
 
-		<link  href="http://127.0.0.1:8000/./data/boilerplate.orig/css/main.css" rel="stylesheet"/>
+		<link  href="http://127.0.0.1:8000/#./data/boilerplate.orig/css/main.css" rel="stylesheet"/>
 	</head>
 <body>
 	<!-- three.js container -->
@@ -24,9 +24,9 @@
 	<!-- info on screen display -->
 	<div id="info">
 		<div class="top">
-			<a href="http://127.0.0.1:8000/./data/boilerplate.orig/http://learningthreejs.com/blog/2011/12/20/boilerplate-for-three-js/" target="_blank">LearningThree.js</a>
+			<a href="http://127.0.0.1:8000/#./data/boilerplate.orig/http://learningthreejs.com/blog/2011/12/20/boilerplate-for-three-js/" target="_blank">LearningThree.js</a>
 			boiler plate for
-			<a href="http://127.0.0.1:8000/./data/boilerplate.orig/https://github.com/mrdoob/three.js/" target="_blank">three.js</a>
+			<a href="http://127.0.0.1:8000/#./data/boilerplate.orig/https://github.com/mrdoob/three.js/" target="_blank">three.js</a>
 		</div>
 		<div class="bottom" id="inlineDoc" >
 			- <i>p</i> for screenshot
@@ -47,6 +47,7 @@
 					antialias		: true,	// to get smoother output
 					preserveDrawingBuffer	: true	// to allow screenshot
 				});
+				renderer.setClearColor( 0xbbbbbb );
 			}else{
 				renderer	= new THREE.CanvasRenderer();
 			}
@@ -100,23 +101,9 @@
 			scene.add( light );
 
 			var geometry	= new THREE.TorusGeometry( 1, 0.42, 16, 16 );
-			var material	= new THREE.MeshLambertMaterial({ambient: 0x808080, color: Math.random() * 0xffffff});
+			var material	= new THREE.MeshPhongMaterial({ambient: 0x808080, color: Math.random() * 0xffffff});
 			var mesh	= new THREE.Mesh( geometry, material ); 
 			scene.add( mesh );
-
-			// define the stack of passes for postProcessing
-			composer = new THREE.EffectComposer( renderer );
-			renderer.autoClear = false;
-
-			var renderModel	= new THREE.RenderPass( scene, camera );
-			composer.addPass( renderModel );
-
-			var effectBloom = new THREE.BloomPass( 1.5 );
-			composer.addPass( effectBloom );
-
-			var effectScreen= new THREE.ShaderPass( THREE.ShaderExtras[ "screen" ] );
-			effectScreen.renderToScreen = true;
-			composer.addPass( effectScreen );
 		}
 
 		// animation loop
@@ -162,9 +149,9 @@
 			})
 
 			// actually render the scene
-			// renderer.clear();
-			composer.render();
+			renderer.render( scene, camera );
 		}
 	</script>
 </body>
 </html>
+ 
