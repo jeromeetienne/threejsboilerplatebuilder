@@ -10,6 +10,7 @@ var origFileList = [
 	"./vendor/three.js/Detector.js",
 	"./vendor/three.js/Stats.js",
 	"./vendor/three.js/Three.js",
+	"./vendor/three.js/TrackballControls.js",
 	"./vendor/threex/docs/docco.css",
 	"./vendor/threex/docs/THREEx.CelShader.html",
 	"./vendor/threex/docs/THREEx.CubeMap.html",
