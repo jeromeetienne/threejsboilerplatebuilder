@@ -16,8 +16,12 @@
 		<script src="vendor/threex/THREEx.screenshot.js"></script>
 		<script src="vendor/threex/THREEx.FullScreen.js"></script>
 		<script src="vendor/threex/THREEx.WindowResize.js"></script>
+	//? if(data.cameraControl === 'dragPan' ){
 		<script src="vendor/threex.dragpancontrols.js"></script>
-
+	//? }else if(data.cameraControl === 'trackball' ){
+		<script src="vendor/three.js/TrackballControls.js"></script>
+	//? }else console.assert(false, 'cameraControl value is invalid');
+		
 		<link  href="css/main.css" rel="stylesheet"/>
 	</head>
 <body>
